@@ -43,13 +43,13 @@ function displayDays() {
     for (let day = 1; day <= days; day++) {
         daysDiv.innerHTML += `<button type="button" class="btn btn-outline-primary circular-btn" data-toggle="modal" data-target=".bd-example-modal-lg"><div class="day">${day}</div></button>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      ...
-    </div>
-  </div>
-</div>`;
+                              <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                      ...
+                                    </div>
+                                  </div>
+                              </div>`;
         if (day % 7 == 0) {
             daysDiv.innerHTML += `<br /><br />`
         }
