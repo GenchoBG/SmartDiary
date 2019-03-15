@@ -17,28 +17,83 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">IntelliMood.Web</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">IntelliMood.Web</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
-                <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
-            </ul>
-            @await Html.PartialAsync("_LoginPartial")
-        </div>
-    </nav>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
+                </ul>
+                @await Html.PartialAsync("_LoginPartial")
+            </div>
+        </nav>
+    }
     <div class="container body-content" style="height: 100vh">
-        @RenderBody()
+        @if (User.Identity.IsAuthenticated)
+        {
+
+            <div class="wrapper toggled">
+                <div class="row">
+                    <div class=" col-2">
+                        <div class="sidebar-wrapper">
+                            <ul class="sidebar-nav">
+                                <li class="sidebar-brand">
+                                    <p>Menu</p>
+                                </li>
+                                <li>
+                                    <a asp-controller="Manage" asp-action="Index" title="Manage">Profile</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Calendar" asp-action="Index">Calendar</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="Stats" asp-action="Index">Stats</a>
+                                </li>
+                                <li>
+                                    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="form-inline my-2 my-lg-0">
+                                        <ul class="navbar-nav mr-auto">
+                                            <li class="nav-item">
+                                                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Log out</button>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Page Content -->
+                    <div class="col-10">
+                        <div class="container-fluid">
+                            @RenderBody()
+                        </div>
+                    </div>
+                    <!-- /#page-content-wrapper -->
+                </div>
+            </div>
+
+        }
+        else
+        {
+            @RenderBody()
+        }
     </div>
-    <hr />
-    <footer style="bottom: 0">
-        @await  Html.PartialAsync("../Home/Contact")
-        <p>&copy; 2019 - IntelliMood.Web</p>
-    </footer>
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <hr />
+        <footer style="bottom: 0">
+            @await Html.PartialAsync("../Home/Contact")
+            <p>&copy; 2019 - IntelliMood.Web</p>
+        </footer>
+    }
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
