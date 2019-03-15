@@ -24,7 +24,7 @@ namespace IntelliMood.Services.Implementations
                 Content = content,
                 IsResponse = isResponse,
                 UserId = userId,
-                Time = DateTime.Today
+                Time = DateTime.Now
             };
 
             this.db.Messages.Add(message);
