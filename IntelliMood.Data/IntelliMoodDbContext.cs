@@ -8,9 +8,9 @@ using IntelliMood.Web.Models;
 
 namespace IntelliMood.Web.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class IntelliMoodDbContext : IdentityDbContext<User>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public IntelliMoodDbContext(DbContextOptions<IntelliMoodDbContext> options)
             : base(options)
         {
         }
