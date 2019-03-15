@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using IntelliMood.Data;
 using IntelliMood.Data.Models;
+using IntelliMood.Services;
 using IntelliMood.Services.Implementations;
 using IntelliMood.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -45,6 +46,7 @@ namespace IntelliMood.Web
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IChatService, ChatService>();
+            services.AddTransient<IEmotionGetter, EmotionGetter>();
 
             services.AddAutoMapper();
 

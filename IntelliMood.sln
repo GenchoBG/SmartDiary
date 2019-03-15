@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelliMood.Data", "Intelli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelliMood.Services", "IntelliMood.Services\IntelliMood.Services.csproj", "{35A24CCF-3DE3-405F-841E-2BF06C6668F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelliMood.Tests", "IntelliMood.Tests\IntelliMood.Tests.csproj", "{F20EE520-1A86-40A1-BE5A-2B5F12546D8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelliMood.Tests", "IntelliMood.Tests\IntelliMood.Tests.csproj", "{F20EE520-1A86-40A1-BE5A-2B5F12546D8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
