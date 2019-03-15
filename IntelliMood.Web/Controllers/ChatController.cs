@@ -52,14 +52,15 @@ namespace IntelliMood.Web.Controllers
 
             var mood = this.emotionGetter.GetEmotionFromText(data.Message);
             var moodMessage = $"You are feeling {mood}";
+            var responseMessage = this.chatService.AddMessage(moodMessage, currentUserId, true);
 
             this.moodService.Add(currentUserId, mood);
 
 
             return this.Json(new
             {
-                myMessage = message,
-                response = this.chatService.AddMessage(moodMessage, currentUserId, true)
+                myMessage = this.mapper.Map<MessageListViewModel>(message),
+                response = this.mapper.Map<MessageListViewModel>(responseMessage),
             }); //recommendation json response
         }
 
