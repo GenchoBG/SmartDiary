@@ -8,6 +8,10 @@ function clearMessages()
     $("#messages").html("");
 }
 
+function scrollToBottom() {
+    $("#messages").animate({ scrollTop: $('#messages').prop('scrollHeight') }, 500);
+}
+
 function clearChatBox() {
     $("#chatBox").val("");
 }
@@ -31,6 +35,8 @@ $("#enterBtn").on("click",
                 clearChatBox();
                 appendMessage(message);
                 appendMessage(response);
+
+                scrollToBottom();
             },
             error: function() {
                 console.log("Error");
@@ -39,6 +45,13 @@ $("#enterBtn").on("click",
 
         event.preventDefault();
     });
+
+$("#chatBox").on("keypress", function(event) 
+{
+    if (event.which === 13) {
+        $("#enterBtn").click();
+    }
+});
 
 $(document).ready(function() {
     $.ajax({
@@ -50,9 +63,10 @@ $(document).ready(function() {
             for (let message of data) {
                 appendMessage(message);
             }
+            scrollToBottom();
         },
         error: function () {
             console.log("Error");
         }
     });
-})
+});
