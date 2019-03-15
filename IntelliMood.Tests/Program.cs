@@ -1,5 +1,6 @@
 ﻿using System;
 using IntelliMood.Services;
+using IntelliMood.Services.Implementations;
 
 namespace IntelliMood.Tests
 {
@@ -7,18 +8,7 @@ namespace IntelliMood.Tests
     {
         public static void Main()
         {
-            string text = Console.ReadLine();
-
-            EmotionGetter get = new EmotionGetter();
-
-            while (true)
-            {
-                string mood = get.GetEmotionFromText(text);
-
-                Console.WriteLine(mood);
-
-                text = Console.ReadLine();
-            }
+            var emotionsGuesser = new MyEmotionGetter();
 
         }
     }

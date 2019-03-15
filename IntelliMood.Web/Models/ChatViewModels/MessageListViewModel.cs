@@ -1,9 +1,6 @@
 ﻿using IntelliMood.Data.Models;
 using IntelliMood.Web.Infrastructure.Mapper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace IntelliMood.Web.Models.ChatViewModels
 {

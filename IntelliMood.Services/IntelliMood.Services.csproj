@@ -7,9 +7,23 @@
 
   <ItemGroup>
 
+    <PackageReference Include="Microsoft.ML" Version="0.11.0" />
+
     <PackageReference Include="unirest-netcore20" Version="1.0.1" />
     <ProjectReference Include="..\IntelliMood.Data\IntelliMood.Data.csproj" />
 
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Datasets\sample_submission.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Datasets\test_data.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Datasets\train_data.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
