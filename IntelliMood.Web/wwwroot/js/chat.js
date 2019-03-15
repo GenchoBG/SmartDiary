@@ -1,4 +1,17 @@
-﻿$("#enterBtn").on("click",
+﻿function appendMessage(message) {
+    $("#messages").append($(`<p>${message.content}</p>`));
+}
+
+function clearMessages()
+{
+    $("#messages").html("");
+}
+
+function clearChatBox() {
+    $("#chatBox").val("");
+}
+
+$("#enterBtn").on("click",
     function(event) {
 
         console.log($("#chatBox").val());
@@ -10,10 +23,10 @@
             data: {
                 'message': $("#chatBox").val()
             },
-            success: function (response) {
+            success: function (message) {
                 console.log("SUCCESS");
-                $("#chatBox").val("");
-                
+                clearChatBox();
+                appendMessage(message);
             },
             error: function() {
                 console.log("Error");
@@ -29,8 +42,9 @@ $(document).ready(function() {
         type: 'get',
         success: function (data) {
             console.log(data);
+            clearMessages();
             for (let message of data) {
-                $("#messages").append($(`<p>${message.content}</p>`));
+                appendMessage(message);
             }
         },
         error: function () {

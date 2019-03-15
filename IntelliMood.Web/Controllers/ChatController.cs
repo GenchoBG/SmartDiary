@@ -35,9 +35,9 @@ namespace IntelliMood.Web.Controllers
                 return this.BadRequest();
             }
 
-            this.chatService.AddMessage(data.Message, this.userManager.GetUserId(this.User), false);
+            var message = this.chatService.AddMessage(data.Message, this.userManager.GetUserId(this.User), false);
 
-            return this.Json("yess"); //recommendation json response
+            return this.Json(message); //recommendation json response
         }
 
         [HttpGet]

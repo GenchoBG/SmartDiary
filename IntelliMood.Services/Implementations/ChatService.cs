@@ -17,17 +17,21 @@ namespace IntelliMood.Services.Implementations
             this.db = db;
         }
 
-        public void AddMessage(string content, string userId, bool isResponse)
+        public Message AddMessage(string content, string userId, bool isResponse)
         {
-            this.db.Messages.Add(new Message()
+            var message = new Message()
             {
                 Content = content,
                 IsResponse = isResponse,
                 UserId = userId,
                 Time = DateTime.Today
-            });
+            };
+
+            this.db.Messages.Add(message);
 
             this.db.SaveChanges();
+
+            return message;
         }
 
         public IQueryable<Message> GetMessagesForUser(string userId, DateTime date)
