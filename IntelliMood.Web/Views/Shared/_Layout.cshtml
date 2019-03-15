@@ -47,6 +47,9 @@
                                     <p>Menu</p>
                                 </li>
                                 <li>
+                                    <a asp-controller="Chat" asp-action="Index">Chat</a>
+                                </li>
+                                <li>
                                     <a asp-controller="Manage" asp-action="Index" title="Manage">Profile</a>
                                 </li>
                                 <li>
@@ -70,7 +73,7 @@
 
                     <!-- Page Content -->
                     <div class="col-10">
-                        <div class="container-fluid">
+                        <div class="container-fluid" id="">
                             @RenderBody()
                         </div>
                     </div>
