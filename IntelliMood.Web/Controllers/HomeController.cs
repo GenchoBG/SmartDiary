@@ -12,6 +12,10 @@ namespace IntelliMood.Web.Controllers
     {
         public IActionResult Index()
         {
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Chat");
+            }
             return View();
         }
 

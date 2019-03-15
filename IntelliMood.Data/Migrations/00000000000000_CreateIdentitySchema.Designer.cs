@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace IntelliMood.Web.Data.Migrations
+namespace IntelliMood.Data.Migrations
 {
     [DbContext(typeof(IntelliMoodDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]

@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using IntelliMood.Data;
+using IntelliMood.Data.Models;
+using IntelliMood.Services.Implementations;
+using IntelliMood.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using IntelliMood.Web.Data;
 using IntelliMood.Web.Models;
-using IntelliMood.Web.Services;
 
 namespace IntelliMood.Web
 {
@@ -42,6 +44,7 @@ namespace IntelliMood.Web
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IChatService, ChatService>();
 
             services.AddAutoMapper();
 

@@ -5,4 +5,8 @@
     <RootNamespace>IntelliMood.Services</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\IntelliMood.Data\IntelliMood.Data.csproj" />
+  </ItemGroup>
+
 </Project>
