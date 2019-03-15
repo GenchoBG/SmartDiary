@@ -134,3 +134,24 @@ body {
 .marginTop {
     margin-top: 3%;
 }
+
+/*Stats*/
+
+.header {
+	text-align: center;
+}
+.monthly-yearly-tabs {
+	background-color: black;
+	display: inline-block;
+	width: 500px;
+	margin: 0 auto;
+}
+
+.monthly-yearly-tabs .green-text{
+	color: #00fa9a;
+	text-decoration: none;
+}
+
+.tab {
+	margin-right: 20px;
+}
