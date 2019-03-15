@@ -20,6 +20,9 @@ namespace IntelliMood.Web.Models.ManageViewModels
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
 
+        [Display(Name = "Diary name")]
+        public string DiaryName { get; set; }
+
         public string StatusMessage { get; set; }
     }
 }

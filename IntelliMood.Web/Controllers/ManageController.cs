@@ -61,7 +61,8 @@ namespace IntelliMood.Web.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
+                StatusMessage = StatusMessage,
+                DiaryName = user.DiaryName
             };
 
             return View(model);
@@ -102,6 +103,18 @@ namespace IntelliMood.Web.Controllers
                 }
             }
 
+
+            var diaryName = user.DiaryName;
+            if (model.DiaryName != diaryName)
+            {
+                user.DiaryName = model.DiaryName;
+                var setDiaryNameResult = await this._userManager.UpdateAsync(user);
+
+                if (!setDiaryNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                }
+            }
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }
