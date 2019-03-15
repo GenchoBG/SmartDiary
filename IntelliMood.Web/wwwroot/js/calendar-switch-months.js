@@ -10,7 +10,7 @@ var daysDiv = document.getElementById("calendar-days");
 
 
 function daysInMonth(month, year) {
-    return new Date(year, month, 0).getDate();
+    return new Date(year, month + 1, 0).getDate();
 }
 
 function displayDays() {

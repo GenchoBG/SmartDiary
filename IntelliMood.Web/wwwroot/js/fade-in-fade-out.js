@@ -1,29 +1,26 @@
-﻿
-console.log(`Year: ${year}; Month: ${month}`);
-
-$("#btn-back").click(function () {
-    $("#month-name").fadeOut("slow", function () {
-        $(this).html(monthNames[month - 1 == -1 ? 11 : month - 1]).fadeIn("slow");
-    });
+﻿$("#btn-back").click(function () {
     month -= 1;
     if (month == -1) {
         month = 11;
         year--;
     }
+    $("#month-name").fadeOut("slow", function () {
+        $(this).html(monthNames[month]).fadeIn("slow");
+    });
     days = daysInMonth(month, year);
     daysDiv.innerHTML = "";
     displayDays();
 });
 
 $("#btn-forward").click(function () {
-    $("#month-name").fadeOut("slow", function () {
-        $(this).html(monthNames[month + 1 == 12 ? 0 : month + 1]).fadeIn("slow");
-    });
-    console.log(`Year: ${year}; Month: ${month}`);
+    month += 1;
     if (month == 12) {
         month = 0;
         year++;
     }
+    $("#month-name").fadeOut("slow", function () {
+        $(this).html(monthNames[month]).fadeIn("slow");
+    });    
     days = daysInMonth(month, year);
     daysDiv.innerHTML = "";
     displayDays();
