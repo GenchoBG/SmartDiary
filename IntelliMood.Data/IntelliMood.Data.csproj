@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>IntelliMood.Data</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="microsoft.aspnetcore.identity.entityframeworkcore" Version="2.0.4" />
+    <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.0.3" />
+    <PackageReference Include="microsoft.entityframeworkcore.tools" Version="2.0.2" />
+  </ItemGroup>
+
+</Project>

@@ -18,4 +18,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\IntelliMood.Data\IntelliMood.Data.csproj" />
+    <ProjectReference Include="..\IntelliMood.Services\IntelliMood.Services.csproj" />
+  </ItemGroup>
+
 </Project>
