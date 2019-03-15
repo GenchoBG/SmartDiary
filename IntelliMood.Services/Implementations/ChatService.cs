@@ -31,7 +31,7 @@ namespace IntelliMood.Services.Implementations
 
         public IQueryable<Message> GetMessagesForUser(string userId, DateTime date)
         {
-            return this.db.Messages.Where(m => m.UserId == userId && m.Time == date).AsQueryable();
+            return this.db.Messages.Where(m => m.UserId == userId && m.Time.DayOfYear == date.DayOfYear).AsQueryable();
         }
     }
 }
