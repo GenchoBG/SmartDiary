@@ -1,40 +1,91 @@
 ﻿google.charts.load('current', { 'packages': ['corechart'] });
-google.charts.setOnLoadCallback(drawChart);
+//google.charts.setOnLoadCallback(drawMonthlyChart);
 
 // Happy, Happy, Happy, Sad
-function drawChart(rawData) {
-	var data = google.visualization.arrayToDataTable([
-		['Mood', 'Days'],
-		['Happy', 8],
-		['Sad', 2],
-		['Okay', 4],
-		['Angry', 2],
-		['Sleep', 8]
-	]);
+function drawMonthlyChart(rawData) {
+    var chart = new google.visualization.PieChart(document.getElementById('monthly-piechart'));
+    console.log(rawData);
 
+    var dict = {};
+    for (var i = 0; i < rawData.length; i++) {
+        var current = rawData[i];
+
+        if (dict.hasOwnProperty(current)) {
+            dict[current]++;
+        } else {
+            dict[current] = 1;
+        }
+    }
+
+    var arr = [
+        ['Mood', 'Days']
+    ];
+
+    for (var key in dict) {
+        arr.push([key, dict[key]]);
+    }
+
+    console.log(arr);
+
+	var data = google.visualization.arrayToDataTable(arr);
 	
 	var options = { 'title': 'Monthly', 'width': 550, 'height': 400 };
 
-	
-	var chart = new google.visualization.PieChart(document.getElementById('monthly-piechart'));
-	chart.draw(data, options);
+    chart.draw(data, options);
+}
 
+function drawYearlyChart(rawData) {
+    var chart = new google.visualization.PieChart(document.getElementById('yearly-piechart'));
+    console.log(rawData);
 
-	data = google.visualization.arrayToDataTable([
-		['Mood', 'Days'],
-		['Happy', 122],
-		['Sad', 44],
-		['Okay', 33],
-		['Angry', 22],
-		['Sleep', 11]
-	]);
+    var dict = {};
+    for (var i = 0; i < rawData.length; i++) {
+        var current = rawData[i];
 
-	options = { 'title': 'Yearly', 'width': 550, 'height': 400 };
+        if (dict.hasOwnProperty(current)) {
+            dict[current]++;
+        } else {
+            dict[current] = 1;
+        }
+    }
 
-	var chart = new google.visualization.PieChart(document.getElementById('yearly-piechart'));
-	chart.draw(data, options);
+    var arr = [
+        ['Mood', 'Days']
+    ];
+
+    for (var key in dict) {
+        arr.push([key, dict[key]]);
+    }
+
+    console.log(arr);
+
+    var data = google.visualization.arrayToDataTable(arr);
+
+    var options = { 'title': 'Yearly', 'width': 550, 'height': 400 };
+
+    chart.draw(data, options);
 }
 
 $(document).ready(function() {
+    $.ajax({
+        url: '/Stats/GetMonthly?month=3&year=2019',
+        type: 'get',
+        success: function (data) {
+            drawMonthlyChart(data);
+        },
+        error: function () {
+            console.log("Error");
+        }
+    });
 
+    $.ajax({
+        url: '/Stats/GetYearly?year=2019',
+        type: 'get',
+        success: function (data) {
+            drawYearlyChart(data);
+        },
+        error: function () {
+            console.log("Error");
+        }
+    });
 });

@@ -18,15 +18,20 @@ namespace IntelliMood.Web.Controllers
         private readonly IChatService chatService;
         private readonly UserManager<User> userManager;
 		private readonly IMapper mapper;
-        public ChatController(IChatService chatService, UserManager<User> userManager, IEmotionGetter emotionGetter, IMapper mapper)
-			this.chatService = chatService;
-            this.userManager = userManager;
-			this.mapper = mapper;
+        private readonly IEmotionGetter emotionGetter;
+        private readonly IMoodService moodService;
 
+        public ChatController(IChatService chatService, UserManager<User> userManager, IMapper mapper, IEmotionGetter emotionGetter, IMoodService moodService)
+        {
+            this.chatService = chatService;
+            this.userManager = userManager;
+            this.mapper = mapper;
+            this.emotionGetter = emotionGetter;
+            this.moodService = moodService;
+        }
         
         public async Task<IActionResult> Index()
         {
-            
             var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
 
             var model = this.mapper.Map<ChatIndexViewModel>(user);
