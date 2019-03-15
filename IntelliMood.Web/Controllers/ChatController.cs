@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using IntelliMood.Data.Models;
+using IntelliMood.Services;
 using IntelliMood.Services.Interfaces;
 using IntelliMood.Web.Models.ChatViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -16,14 +17,11 @@ namespace IntelliMood.Web.Controllers
     {
         private readonly IChatService chatService;
         private readonly UserManager<User> userManager;
-        private readonly IMapper mapper;
-
-        public ChatController(IChatService chatService, UserManager<User> userManager, IMapper mapper)
-        {
+		private readonly IMapper mapper;		private readonly IEmotionGetter emotionGetter;
+        public ChatController(IChatService chatService, UserManager<User> userManager, IEmotionGetter emotionGetter, IMapper mapper)        {
             this.chatService = chatService;
             this.userManager = userManager;
-            this.mapper = mapper;
-        }
+			this.emotionGetter = emotionGetter;			this.mapper = mapper;        }
 
         public async Task<IActionResult> Index()
         {
@@ -42,9 +40,15 @@ namespace IntelliMood.Web.Controllers
                 return this.BadRequest();
             }
 
-            var message = this.chatService.AddMessage(data.Message, this.userManager.GetUserId(this.User), false);
+            var currentUserId = this.userManager.GetUserId(this.User);
+            var message = this.chatService.AddMessage(data.Message, currentUserId, false);
+            var mood = this.emotionGetter.GetEmotionFromText(data.Message);
 
-            return this.Json(message); //recommendation json response
+            return this.Json(new
+            {
+                myMessage = message,
+                response = this.chatService.AddMessage(mood, currentUserId, true)
+            }); //recommendation json response
         }
 
         [HttpGet]

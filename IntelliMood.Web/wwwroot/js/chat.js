@@ -25,10 +25,13 @@ $("#enterBtn").on("click",
             data: {
                 'message': $("#chatBox").val()
             },
-            success: function (message) {
+            success: function (messageData) {
+                var message = messageData.myMessage;
+                var response = messageData.response;
                 console.log("SUCCESS");
                 clearChatBox();
                 appendMessage(message);
+                appendMessage(response);
             },
             error: function() {
                 console.log("Error");

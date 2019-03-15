@@ -1,0 +1,44 @@
+﻿
+@{
+	ViewData["Title"] = "Index";
+}
+<body onload="drawChart()">
+	<h2 class="display-4 header"> Stats </h2>
+
+
+	<div id="monthly-piechart"></div>
+	<div id="yearly-piechart"></div>
+
+
+</body>
+
+
+@section Scripts
+	{
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" src="~/js/pie-chart-drawer.js"></script>
+	<script>
+		$.ajax({
+			url: '/Stats/GetMonthly',
+			type: 'get',
+			success: function (data) {
+				drawChart(data);
+			},
+			error: function() {
+				console.log("Error");
+			}
+		});
+
+		$.ajax({
+			url: '/Stats/GetYearly',
+			type: 'get',
+			success: function (data) {
+				drawChart(data);
+			},
+			error: function () {
+				console.log("Error");
+			}
+		});
+	</script>
+}
+
