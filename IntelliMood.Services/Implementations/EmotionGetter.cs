@@ -40,20 +40,20 @@ namespace IntelliMood.Services
 
     public class Emotions
     {
-        public int Happiness { get; set; }
-        public int Surprise { get; set; }
-        public int Calm { get; set; }
-        public int Fear { get; set; }
-        public int Sadness { get; set; }
-        public int Anger { get; set; }
-        public int Disgust { get; set; }
+        public double Happiness { get; set; }
+        public double Surprise { get; set; }
+        public double Calm { get; set; }
+        public double Fear { get; set; }
+        public double Sadness { get; set; }
+        public double Anger { get; set; }
+        public double Disgust { get; set; }
 
         public int Emotional_intensity_rate { get; set; }
 
         public string GetDominantEmotion()
         {
             var maxName = "";
-            var maxValue = int.MinValue;
+            var maxValue = double.MinValue;
 
             var properties = this.GetType()
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -62,7 +62,7 @@ namespace IntelliMood.Services
             {
                 if (propertyInfo.Name != nameof(Emotional_intensity_rate))
                 {
-                    var value = (int)propertyInfo.GetValue(this);
+                    var value = (double)propertyInfo.GetValue(this);
                     if (value > maxValue)
                     {
                         maxValue = value;
