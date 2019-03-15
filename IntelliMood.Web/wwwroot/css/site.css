@@ -17,6 +17,11 @@
     height: 40px;
 }
 
+#month-name {
+    display: inline-block;
+    width: 500px;
+}
+
 .circular-btn {
     border-radius: 100%;
 }
