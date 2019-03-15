@@ -34,3 +34,7 @@ function drawChart(rawData) {
 	var chart = new google.visualization.PieChart(document.getElementById('yearly-piechart'));
 	chart.draw(data, options);
 }
+
+$(document).ready(function() {
+
+});

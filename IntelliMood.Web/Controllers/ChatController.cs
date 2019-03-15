@@ -17,12 +17,14 @@ namespace IntelliMood.Web.Controllers
         private readonly IChatService chatService;
         private readonly UserManager<User> userManager;
         private readonly IEmotionGetter emotionGetter;
+        private readonly IMoodService moodService;
 
-        public ChatController(IChatService chatService, UserManager<User> userManager, IEmotionGetter emotionGetter)
+        public ChatController(IChatService chatService, UserManager<User> userManager, IEmotionGetter emotionGetter, IMoodService moodService)
         {
             this.chatService = chatService;
             this.userManager = userManager;
             this.emotionGetter = emotionGetter;
+            this.moodService = moodService;
         }
 
         public IActionResult Index()
@@ -40,12 +42,17 @@ namespace IntelliMood.Web.Controllers
 
             var currentUserId = this.userManager.GetUserId(this.User);
             var message = this.chatService.AddMessage(data.Message, currentUserId, false);
+
             var mood = this.emotionGetter.GetEmotionFromText(data.Message);
+            var moodMessage = $"You are feeling {mood}";
+
+            this.moodService.Add(currentUserId, mood);
+
 
             return this.Json(new
             {
                 myMessage = message,
-                response = this.chatService.AddMessage(mood, currentUserId, true)
+                response = this.chatService.AddMessage(moodMessage, currentUserId, true)
             }); //recommendation json response
         }
 

@@ -8,6 +8,8 @@ namespace IntelliMood.Data
     {
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<Mood> Moods { get; set; }
+
         public IntelliMoodDbContext(DbContextOptions<IntelliMoodDbContext> options)
             : base(options)
         {

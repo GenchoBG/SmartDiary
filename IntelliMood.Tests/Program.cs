@@ -9,7 +9,6 @@ namespace IntelliMood.Tests
         public static void Main()
         {
             var emotionsGuesser = new MyEmotionGetter();
-
         }
     }
 }

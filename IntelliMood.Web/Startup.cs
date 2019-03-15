@@ -47,6 +47,7 @@ namespace IntelliMood.Web
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IChatService, ChatService>();
             services.AddTransient<IEmotionGetter, EmotionGetter>();
+            services.AddTransient<IMoodService, MoodService>();
 
             services.AddAutoMapper();
 
