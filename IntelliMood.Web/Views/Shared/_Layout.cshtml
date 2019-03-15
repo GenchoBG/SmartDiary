@@ -34,59 +34,64 @@
             </div>
         </nav>
     }
-    <div class="container body-content" style="height: 100vh">
-        @if (User.Identity.IsAuthenticated)
-        {
 
-            <div class="wrapper toggled">
-                <div class="row">
-                    <div class=" col-2">
-                        <div class="sidebar-wrapper">
-                            <ul class="sidebar-nav">
-                                <li class="sidebar-brand">
-                                    <p>Menu</p>
-                                </li>
-                                <li>
-                                    <a asp-controller="Chat" asp-action="Index">Chat</a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Manage" asp-action="Index" title="Manage">Profile</a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Calendar" asp-action="Index">Calendar</a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Stats" asp-action="Index">Stats</a>
-                                </li>
-                                <li>
-                                    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="form-inline my-2 my-lg-0">
-                                        <ul class="navbar-nav mr-auto">
-                                            <li class="nav-item">
-                                                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Log out</button>
-                                            </li>
-                                        </ul>
-                                    </form>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row" id="contentPage">
+            <!-- Sidebar -->
+            <div class="col-2">
+                <div class="sidebar">
+                    <div>
+                        <p id="menuHeader">Menu</p>
+                    </div>
+                    <div class="linkSidebar">
+                        <div class="text">
+                            <a asp-controller="Chat" asp-action="Index">Chat</a>
+                        </div>
+                    </div>
+                    <div class="linkSidebar">
+                        <div class="text">
+                            <a asp-controller="Manage" asp-action="Index" title="Manage">Profile</a>
+                        </div>
+                    </div>
+                    <div class="linkSidebar">
+                        <div class="text">
+                            <a asp-controller="Calendar" asp-action="Index">Calendar</a>
+                        </div>
+                    </div>
+                    <div class="linkSidebar">
+                        <div class="text">
+                            <a asp-controller="Stats" asp-action="Index">Stats</a>
+                        </div>
+                    </div>
+                    <div id="logoutbtn">
+                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="form-inline my-2 my-lg-0">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Log out</button>
                                 </li>
                             </ul>
-                        </div>
+                        </form>
                     </div>
-
-                    <!-- Page Content -->
-                    <div class="col-10">
-                        <div class="container-fluid" id="">
-                            @RenderBody()
-                        </div>
-                    </div>
-                    <!-- /#page-content-wrapper -->
                 </div>
             </div>
 
-        }
-        else
-        {
+            <!-- Page Content -->
+            <div class="col-10">
+                <div class="container-fluid" id="">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <div class="container body-content" style="height: 100vh">
             @RenderBody()
-        }
-    </div>
+        </div>
+    }
+
 
     @if (!User.Identity.IsAuthenticated)
     {

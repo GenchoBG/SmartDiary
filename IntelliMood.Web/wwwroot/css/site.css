@@ -11,133 +11,28 @@
 }
 
 .day {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    display: inline-block;
     font-size: 35px;
     width: 40px;
-    height: 50px;
-}
-
-#month-name {
-    display: inline-block;
-    width: 500px;
-}
-
-#year {
-    margin: 0 auto;
-    width: 200px;
-    font-size: 40px;
+    height: 40px;
 }
 
 .circular-btn {
     border-radius: 100%;
 }
 
-body {
+body, html {
     overflow-x: hidden;
+    min-height: 100%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
-
-
-.wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-
-.sidebar-wrapper {
-    z-index: 1000;
-    position: fixed;
-    left: 250px;
-    width: 0;
-    height: 100%;
-    margin-left: -250px;
-    overflow-y: auto;
-    background: #000;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-.wrapper.toggled .sidebar-wrapper {
-    width: 250px;
-}
-
-.page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
-}
-
-.wrapper.toggled .page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
-}
-
-/* Sidebar Styles */
-
-.sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 90%;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-}
-
-.sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #999999;
- }
-
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
-}
-
-.sidebar-nav li a:active, .sidebar-nav li a:focus {
-    text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
-}
-
-.sidebar-nav > .sidebar-brand a {
-    color: #999999;
-}
-
-.sidebar-brand p {
-    color: #00fa9a;
-}
-
-.sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
-}
-
 
 .divided{
     border-right: 1px solid lightgray;
@@ -150,23 +45,119 @@ body {
     margin-top: 3%;
 }
 
-/*Stats*/
-
-.header {
-	text-align: center;
+/* sidebar */
+.sidebar{
+    max-width: 100%;
+    background: black;
+    padding:10px 0px 20px 0px;
+    border:1px solid #111;
+    min-height: 100%;
+    left: 0;
+    top: 0;
 }
-.monthly-yearly-tabs {
-	background-color: black;
-	display: inline-block;
-	width: 500px;
-	margin: 0 auto;
+.linkSidebar{
+    font-size:16px;
+    font-weight:300;
+    text-align:center;
+    position:relative;
+    height:40px;
+    line-height:40px;
+    margin-top:10px;
+    overflow:hidden;
+    width:90%;
+    margin-left:5%;
+    cursor:pointer;
 }
 
-.monthly-yearly-tabs .green-text{
-	color: #00fa9a;
-	text-decoration: none;
+.linkSidebar:after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    bottom: 50%;
+    left: -100%;
+    transition-delay: all 0.5s;
+    transition: all 0.5s;
 }
 
-.tab {
-	margin-right: 20px;
+.linkSidebar:hover:after,
+.linkSidebar.hover:after {
+    left: 100%;
+}
+
+.linkSidebar .text {
+    text-shadow: 0px -40px 0px rgba(255, 255, 255, 1);
+    transition: all 0.75s;
+    transform: translateY(100%) translateZ(0);
+    transition-delay: all 0.25s;
+}
+
+.linkSidebar:hover .text,
+.linkSidebar.hover .text {
+    text-shadow: 0px -40px 0px rgba(255, 255, 255, 0);
+    transform: translateY(0%) translateZ(0) scale(1.1);
+    font-weight: 600;
+}
+
+.text a {
+    text-decoration: none;
+}
+
+#menuHeader {
+    text-align: center;
+    color: #00ff7f;
+}
+
+#contentPage {
+    min-height: 100%;
+}
+
+#logoutbtn {
+    display: block;
+    position: relative;
+    width: 36%;
+    margin: 5% auto;
+}
+
+.person {
+    text-align: center;
+    float: right !important;
+}
+
+.message {
+    float: left;
+    clear: both;
+}
+
+.messageContent {
+    padding: 10px 20px;
+    background-color: black;
+    border-radius: 45px;
+    color: #00ff7f;
+    margin-bottom: 0;
+}
+
+.timestamp {
+    font-size: 8pt;
+    float: right;
+}
+
+.noresize {
+    resize: none;
+}
+
+#inputArea {
+    z-index: 3;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    width: 80%;
+    padding: 0 0 1%;
+    margin-bottom: 0;
+}
+
+#messages {
+    overflow-y: auto;
+    direction: ltr;
+    max-height: 80vh;
 }

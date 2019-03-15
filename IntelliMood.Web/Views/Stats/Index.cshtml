@@ -19,7 +19,7 @@
 	<script type="text/javascript" src="~/js/pie-chart-drawer.js"></script>
 	<script>
 		$.ajax({
-			url: '/Stats/GetMonthly',
+			url: '/Stats/GetMonthly/',
 			type: 'get',
 			success: function (data) {
 				drawChart(data);
@@ -30,7 +30,7 @@
 		});
 
 		$.ajax({
-			url: '/Stats/GetYearly',
+			url: '/Stats/GetYearly/',
 			type: 'get',
 			success: function (data) {
 				drawChart(data);

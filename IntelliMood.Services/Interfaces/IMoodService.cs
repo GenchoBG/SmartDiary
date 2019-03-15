@@ -6,7 +6,7 @@ namespace IntelliMood.Services.Interfaces
     public interface IMoodService
     {
         void Add(string userId, string mood);
-        IQueryable<Mood> GetAllMonthly(int month);
+        IQueryable<Mood> GetAllMonthly(int month, int year);
         IQueryable<Mood> GetAllYearly(int year);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using IntelliMood.Data.Models;
 using IntelliMood.Services;
@@ -16,20 +17,21 @@ namespace IntelliMood.Web.Controllers
     {
         private readonly IChatService chatService;
         private readonly UserManager<User> userManager;
-        private readonly IEmotionGetter emotionGetter;
-        private readonly IMoodService moodService;
-
-        public ChatController(IChatService chatService, UserManager<User> userManager, IEmotionGetter emotionGetter, IMoodService moodService)
-        {
-            this.chatService = chatService;
+		private readonly IMapper mapper;
+        public ChatController(IChatService chatService, UserManager<User> userManager, IEmotionGetter emotionGetter, IMapper mapper)
+			this.chatService = chatService;
             this.userManager = userManager;
-            this.emotionGetter = emotionGetter;
-            this.moodService = moodService;
-        }
+			this.mapper = mapper;
 
-        public IActionResult Index()
+        
+        public async Task<IActionResult> Index()
         {
-            return this.View();
+            
+            var user = await this.userManager.FindByNameAsync(this.User.Identity.Name);
+
+            var model = this.mapper.Map<ChatIndexViewModel>(user);
+
+            return this.View(model);
         }
 
         [HttpPost]
