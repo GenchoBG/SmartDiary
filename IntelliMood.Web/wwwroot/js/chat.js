@@ -16,9 +16,25 @@
                 
             },
             error: function() {
-                //TODO: Error popup
+                console.log("Error");
             }
         });
 
         event.preventDefault();
     });
+
+$(document).ready(function() {
+    $.ajax({
+        url: '/Chat/GetMessages',
+        type: 'get',
+        success: function (data) {
+            console.log(data);
+            for (let message of data) {
+                $("#messages").append($(`<p>${message.content}</p>`));
+            }
+        },
+        error: function () {
+            console.log("Error");
+        }
+    });
+})

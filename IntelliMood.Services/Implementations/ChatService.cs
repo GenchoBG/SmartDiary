@@ -23,7 +23,8 @@ namespace IntelliMood.Services.Implementations
             {
                 Content = content,
                 IsResponse = isResponse,
-                UserId = userId
+                UserId = userId,
+                Time = DateTime.Today
             });
 
             this.db.SaveChanges();
