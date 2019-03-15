@@ -9,8 +9,8 @@ namespace IntelliMood.Web.Models.AccountViewModels
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name="Username")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
