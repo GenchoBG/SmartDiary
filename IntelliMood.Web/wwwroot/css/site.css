@@ -123,3 +123,15 @@ body {
     color: #fff;
     background: none;
 }
+
+
+.divided{
+    border-right: 1px solid lightgray;
+    height: 65vh;
+    margin-bottom: 1%;
+    margin-right: 3%;
+}
+
+.marginTop {
+    margin-top: 3%;
+}
