@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="calendar" style="text-align: center; padding-top: 20px;">
+    <button id="btn-back" type="button" class="btn btn-outline-primary" onclick="prevMonth()"> < </button>
+    <p id="month-name"></p>
+    <button id="btn-forward" type="button" class="btn btn-outline-primary" onclick="nextMonth()"> > </button>
+    <div id="calendar-days"></div>
+</div>
+
+@section Scripts{ 
+    <script src="~/js/calendar-switch-months.js"></script>
+}

@@ -8,7 +8,7 @@ namespace IntelliMood.Services.Interfaces
 {
     public interface IChatService
     {
-        void AddMessage(string content, string userId, bool isResponse);
+        Message AddMessage(string content, string userId, bool isResponse);
         IQueryable<Message> GetMessagesForUser(string userId, DateTime date);
     }
 }

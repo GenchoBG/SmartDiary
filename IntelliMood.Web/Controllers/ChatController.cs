@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper.QueryableExtensions;
 using IntelliMood.Data.Models;
 using IntelliMood.Services.Interfaces;
 using IntelliMood.Web.Models.ChatViewModels;
@@ -34,9 +35,17 @@ namespace IntelliMood.Web.Controllers
                 return this.BadRequest();
             }
 
-            this.chatService.AddMessage(data.Message, this.userManager.GetUserId(this.User), false);
+            var message = this.chatService.AddMessage(data.Message, this.userManager.GetUserId(this.User), false);
 
-            return this.Json("yess"); //recommendation json response
+            return this.Json(message); //recommendation json response
+        }
+
+        [HttpGet]
+        public IActionResult GetMessages()
+        {
+            var currentUserId = this.userManager.GetUserId(this.User);
+
+            return this.Json(this.chatService.GetMessagesForUser(currentUserId, DateTime.Now).ProjectTo<MessageListViewModel>().ToList());
         }
     }
 }
