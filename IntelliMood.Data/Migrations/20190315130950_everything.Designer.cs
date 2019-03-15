@@ -11,9 +11,10 @@ using System;
 namespace IntelliMood.Data.Migrations
 {
     [DbContext(typeof(IntelliMoodDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190315130950_everything")]
+    partial class everything
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,6 +52,8 @@ namespace IntelliMood.Data.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("DiaryName");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
