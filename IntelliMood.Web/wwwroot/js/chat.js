@@ -1,8 +1,10 @@
 ﻿function appendMessage(message) {
-    $("#messages").append($(`<div class="message"><div><p class="messageContent">${message.content}</p></div><div class="timestamp">${message.time}</div></div>`)
+    $("#messages").append($(`<div class="message"><p class="messageContent">${message.content.trim()}</p><div class="timestamp">${message.time}</div></div>`)
             .addClass(message.isResponse ? "d-block" : "person d-block"))
         ;
 }
+
+
 
 function clearMessages()
 {
