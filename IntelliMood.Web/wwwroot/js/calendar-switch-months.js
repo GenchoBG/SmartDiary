@@ -4,7 +4,7 @@ var year = today.getFullYear();
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 document.getElementById("month-name").innerText = monthNames[month];
-
+document.getElementById("year").innerText = year;
 var days = daysInMonth(month, year);
 var daysDiv = document.getElementById("calendar-days");
 
@@ -14,8 +14,12 @@ function daysInMonth(month, year) {
 }
 
 function displayDays() {
+    var todayButton = "primary";
     for (let day = 1; day <= days; day++) {
-        daysDiv.innerHTML += `<button type="button" class="btn btn-outline-primary circular-btn" data-toggle="modal" data-target=".bd-example-modal-lg-${day}-${month}-${year}"><div class="day">${day}</div></button>
+        if (day == today.getDate() && month == today.getMonth() && year == today.getFullYear()) {
+            todayButton = "warning";
+        }
+        daysDiv.innerHTML += `<button type="button" class="btn btn-outline-${todayButton} circular-btn" data-toggle="modal" data-target=".bd-example-modal-lg-${day}-${month}-${year}"><div class="day">${day}</div></button>
 
                                 <div class="modal fade bd-example-modal-lg-${day}-${month}-${year}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -37,6 +41,7 @@ function displayDays() {
                                         </div>
                                     </div>
                                 </div>`;
+        todayButton = "primary";
         if (day % 7 == 0) {
             daysDiv.innerHTML += `<br /><br />`
         }
