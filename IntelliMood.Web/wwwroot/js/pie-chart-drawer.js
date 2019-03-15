@@ -1,7 +1,8 @@
 ﻿google.charts.load('current', { 'packages': ['corechart'] });
 google.charts.setOnLoadCallback(drawChart);
 
-function drawChart() {
+// Happy, Happy, Happy, Sad
+function drawChart(rawData) {
 	var data = google.visualization.arrayToDataTable([
 		['Mood', 'Days'],
 		['Happy', 8],

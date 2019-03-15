@@ -8,6 +8,7 @@ namespace IntelliMood.Web.Controllers
 {
     public class StatsController : Controller
     {
+
         public IActionResult Index()
         {
             return this.View();
