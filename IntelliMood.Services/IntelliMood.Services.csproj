@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+
     <PackageReference Include="unirest-netcore20" Version="1.0.1" />
+    <ProjectReference Include="..\IntelliMood.Data\IntelliMood.Data.csproj" />
+
   </ItemGroup>
 
 </Project>

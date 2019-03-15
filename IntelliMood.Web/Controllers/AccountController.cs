@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using IntelliMood.Data.Models;
+using IntelliMood.Services.Interfaces;
+using IntelliMood.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +15,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using IntelliMood.Web.Models;
 using IntelliMood.Web.Models.AccountViewModels;
-using IntelliMood.Web.Services;
 
 namespace IntelliMood.Web.Controllers
 {
@@ -220,7 +222,12 @@ namespace IntelliMood.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.UserName, Email = model.Email };
+                var user = new User
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    DiaryName = "Artie"
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IntelliMood.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using IntelliMood.Web.Models;
 
-namespace IntelliMood.Web.Data
+namespace IntelliMood.Data
 {
     public class IntelliMoodDbContext : IdentityDbContext<User>
     {
+        public DbSet<Message> Messages { get; set; }
+
         public IntelliMoodDbContext(DbContextOptions<IntelliMoodDbContext> options)
             : base(options)
         {

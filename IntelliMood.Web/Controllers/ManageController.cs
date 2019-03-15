@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using IntelliMood.Data.Models;
+using IntelliMood.Services.Interfaces;
+using IntelliMood.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +15,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using IntelliMood.Web.Models;
 using IntelliMood.Web.Models.ManageViewModels;
-using IntelliMood.Web.Services;
 
 namespace IntelliMood.Web.Controllers
 {
@@ -61,7 +63,8 @@ namespace IntelliMood.Web.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
+                StatusMessage = StatusMessage,
+                DiaryName = user.DiaryName
             };
 
             return View(model);
@@ -102,6 +105,18 @@ namespace IntelliMood.Web.Controllers
                 }
             }
 
+
+            var diaryName = user.DiaryName;
+            if (model.DiaryName != diaryName)
+            {
+                user.DiaryName = model.DiaryName;
+                var setDiaryNameResult = await this._userManager.UpdateAsync(user);
+
+                if (!setDiaryNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                }
+            }
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }

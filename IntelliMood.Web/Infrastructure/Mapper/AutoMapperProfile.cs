@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
 using AutoMapper;
-using IntelliMood.Web.Infrastructure.Mapper;
 
-namespace IntelliMood.Web.Infrastructure.Mapping
+namespace IntelliMood.Web.Infrastructure.Mapper
 {
     public class AutoMapperProfile : Profile
     {
