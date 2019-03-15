@@ -6,5 +6,11 @@ namespace IntelliMood.Data.Models
     public class User : IdentityUser
     {
         public string DiaryName { get; set; }
+
+        public bool Notifications { get; set; }
+
+        public string PrimaryColor { get; set; }
+
+        public string SecondaryColor { get; set; }
     }
 }

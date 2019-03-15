@@ -11,9 +11,10 @@ using System;
 namespace IntelliMood.Data.Migrations
 {
     [DbContext(typeof(IntelliMoodDbContext))]
-    partial class IntelliMoodDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190315140921_ColorsAndNotifications")]
+    partial class ColorsAndNotifications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

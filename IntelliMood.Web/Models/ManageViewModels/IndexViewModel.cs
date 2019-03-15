@@ -23,6 +23,15 @@ namespace IntelliMood.Web.Models.ManageViewModels
         [Display(Name = "Diary name")]
         public string DiaryName { get; set; }
 
+        [Display(Name = "Push notifications")]
+        public bool Notifications { get; set; }
+
+        [Display(Name = "Primary color")]
+        public string PrimaryColor { get; set; }
+
+        [Display(Name = "Secondary color")]
+        public string SecondaryColor { get; set; }
+
         public string StatusMessage { get; set; }
     }
 }
