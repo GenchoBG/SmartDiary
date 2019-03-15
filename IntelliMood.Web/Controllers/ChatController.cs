@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper.QueryableExtensions;
 using IntelliMood.Data.Models;
+using IntelliMood.Services;
 using IntelliMood.Services.Interfaces;
 using IntelliMood.Web.Models.ChatViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -15,11 +16,13 @@ namespace IntelliMood.Web.Controllers
     {
         private readonly IChatService chatService;
         private readonly UserManager<User> userManager;
+        private readonly IEmotionGetter emotionGetter;
 
-        public ChatController(IChatService chatService, UserManager<User> userManager)
+        public ChatController(IChatService chatService, UserManager<User> userManager, IEmotionGetter emotionGetter)
         {
             this.chatService = chatService;
             this.userManager = userManager;
+            this.emotionGetter = emotionGetter;
         }
 
         public IActionResult Index()
@@ -35,9 +38,15 @@ namespace IntelliMood.Web.Controllers
                 return this.BadRequest();
             }
 
-            var message = this.chatService.AddMessage(data.Message, this.userManager.GetUserId(this.User), false);
+            var currentUserId = this.userManager.GetUserId(this.User);
+            var message = this.chatService.AddMessage(data.Message, currentUserId, false);
+            var mood = this.emotionGetter.GetEmotionFromText(data.Message);
 
-            return this.Json(message); //recommendation json response
+            return this.Json(new
+            {
+                myMessage = message,
+                response = this.chatService.AddMessage(mood, currentUserId, true)
+            }); //recommendation json response
         }
 
         [HttpGet]
