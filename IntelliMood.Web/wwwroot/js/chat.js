@@ -1,13 +1,23 @@
 ﻿function appendMessage(message) {
-	if (message.isResponse) {
-		$("#messages").append(
-            $(`<div class="message d-block"><img src="../images/robot.png" class="imgBot"> <p class="messageContent"> ${message.content.trim()
-				}</p><div class="timestamp">${message.time}</div></div>`));
-	} else
-	{
-		$("#messages").append($(`<div class="message person d-block"><p class="messageContent">${message.content.trim()}</p><div class="timestamp">${message.time}</div></div>`));
-	}
-	
+    if (message.isResponse) {
+        $("#messages").append(
+            $(`<div class="message d-block"><img src="../images/robot.png" class="imgBot"> <p class="messageContent"> ${message.content
+                }</p><div class="timestamp">${message.time}</div></div>`));
+    } else {
+        $("#messages").append($(`<div class="message person d-block"><p class="messageContent">${message.content.trim()}</p><div class="timestamp">${message.time}</div></div>`));
+    }
+
+}
+
+function appendRecommendation(time, element) {
+    let div = $(
+        `<div class="message d-block"></div>`);
+
+    div.append($(`<img src="../images/robot.png" class="imgBot">`));
+    div.append(element);
+    div.append($(`<div class="timestamp">${time}</div>`));
+
+    $("#messages").append(div);
 }
 
 function clearMessages() {
@@ -38,6 +48,54 @@ function DisplayCurrentTime(date) {
     return `${hours}:${minutes} ${ampm}`;
 };
 
+
+function addRating(recommendationId, rating) {
+    $.ajax({
+        url: '/Chat/AddRating',
+        type: 'post',
+        dataType: 'json',
+        data: {
+            'recommendationId': recommendationId,
+            rating: rating
+        },
+        success: function (data) {
+            console.log(data);
+            clearMessages();
+            for (let message of data) {
+                appendMessage(message);
+            }
+            scrollToBottom();
+        },
+        error: function () {
+            console.log("Error");
+        }
+    });
+}
+
+function addRecommendationWithRating(button, rating) {
+    let recommendation = $($(button).parent().find('input')[0]).val();
+    $.ajax({
+        url: '/Chat/AddRecommendationWithRating',
+        type: 'post',
+        dataType: 'json',
+        data: {
+            'recommendation': recommendation,
+            rating: rating
+        },
+        success: function (data) {
+            console.log(data);
+            clearMessages();
+            for (let message of data) {
+                appendMessage(message);
+            }
+            scrollToBottom();
+        },
+        error: function () {
+            console.log("Error");
+        }
+    });
+}
+
 $("#enterBtn").on("click",
     function (event) {
         if ($("#chatBox").val()) {
@@ -59,13 +117,30 @@ $("#enterBtn").on("click",
                 data: {
                     'message': val
                 },
-                success: function (messageData) {
-                    var message = messageData.myMessage;
-                    var response = messageData.response;
-                    console.log("SUCCESS");
-
+                success: function (data) {
+                    var message = data.myMessage;
+                    var response = data.response;
+                    console.log(data);
 
                     appendMessage(response);
+                    if (data.hasRecommendation) {
+                        var element = $("<div>")
+                            .append($(`<div>Rate my recommendation!</div>`))
+                            .append($(`<button onclick="addRating(${data.recommendationId}, 1)">1</button>`))
+                            .append($(`<button onclick="addRating(${data.recommendationId}, 2)">2</button>`))
+                            .append($(`<button onclick="addRating(${data.recommendationId}, 3)">3</button>`))
+                            .append($(`<button onclick="addRating(${data.recommendationId}, 4)">4</button>`))
+                            .append($(`<button onclick="addRating(${data.recommendationId}, 5)">5</button>`))
+                            .append($(`<div>You did something else? Rate how good it made you feel!</div>`))
+                            .append($(`<input type='text'></input>`))
+                            .append($(`<button onclick="addRecommendationWithRating(this, 1)">1</button>`))
+                            .append($(`<button onclick="addRecommendationWithRating(this, 2)">2</button>`))
+                            .append($(`<button onclick="addRecommendationWithRating(this, 3)">3</button>`))
+                            .append($(`<button onclick="addRecommendationWithRating(this, 4)">4</button>`))
+                            .append($(`<button onclick="addRecommendationWithRating(this, 5)">5</button>`));
+
+                        appendRecommendation(response.time, element);
+                    }
 
                     scrollToBottom();
                 },
@@ -79,13 +154,12 @@ $("#enterBtn").on("click",
 
 $("#chatBox").on("keypress", function (event) {
     if (event.which === 13) {
-        if (!event.shiftKey)
-        {
+        if (!event.shiftKey) {
             $("#enterBtn").click();
         }
         event.preventDefault();
     }
-    
+
 });
 
 function FocusTextarea() {

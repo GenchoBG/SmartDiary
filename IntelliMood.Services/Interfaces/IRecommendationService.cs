@@ -11,5 +11,7 @@ namespace IntelliMood.Services.Interfaces
     {
         IQueryable<Recommendation> GetAll();
         IQueryable<UserRecommendation> GetAllUserRecommendations();
+        void AddRating(string userId, int recommendationId, int rating);
+        void AddRecommendationWithRating(string userId, string recommendation, int rating);
     }
 }

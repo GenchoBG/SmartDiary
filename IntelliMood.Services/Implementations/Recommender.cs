@@ -1,15 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using IntelliMood.Data;
+using IntelliMood.Data.Models;
 using IntelliMood.Services.Interfaces;
 
 namespace IntelliMood.Services.Implementations
 {
     public class Recommender : IRecommender
     {
-        public string RecommendMusic(string userId, string mood)
+        private readonly IntelliMoodDbContext db;
+
+        public Recommender(IntelliMoodDbContext db)
         {
-            return "Manowar - Kings of Metal";
+            this.db = db;
+        }
+
+        public Recommendation RecommendMusic(string userId, string mood)
+        {
+            return this.db.Recommendations.First();
         }
     }
 }
