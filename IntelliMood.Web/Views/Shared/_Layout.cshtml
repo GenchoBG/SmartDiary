@@ -27,7 +27,6 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
                     <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
@@ -62,6 +61,11 @@
                     <div class="linkSidebar">
                         <div class="text">
                             <a asp-controller="Stats" asp-action="Index">Stats</a>
+                        </div>
+                    </div>
+                    <div class="linkSidebar">
+                        <div class="text">
+                            <a asp-controller="Recommendation" asp-action="Stats">Recommendations</a>
                         </div>
                     </div>
                     <div id="logoutbtn"></div>

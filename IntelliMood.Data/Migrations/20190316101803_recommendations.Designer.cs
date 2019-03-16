@@ -12,9 +12,10 @@ using System;
 namespace IntelliMood.Data.Migrations
 {
     [DbContext(typeof(IntelliMoodDbContext))]
-    partial class IntelliMoodDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190316101803_recommendations")]
+    partial class recommendations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,10 +82,10 @@ namespace IntelliMood.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("IsLiked");
+
                     b.Property<string>("Mood")
                         .IsRequired();
-
-                    b.Property<int>("Rating");
 
                     b.Property<string>("RecommendationId")
                         .IsRequired();

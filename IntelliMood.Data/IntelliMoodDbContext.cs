@@ -1,4 +1,5 @@
 ﻿using IntelliMood.Data.Models;
+using IntelliMood.Data.Models.Recommendations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,9 @@ namespace IntelliMood.Data
         public DbSet<Message> Messages { get; set; }
 
         public DbSet<Mood> Moods { get; set; }
+
+        public DbSet<Recommendation> Recommendations { get; set; }
+        public DbSet<UserRecommendation> UserRecommendations { get; set; }
 
         public IntelliMoodDbContext(DbContextOptions<IntelliMoodDbContext> options)
             : base(options)

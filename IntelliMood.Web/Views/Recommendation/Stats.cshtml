@@ -1,0 +1,26 @@
+﻿@model RecommendationTableViewModel
+@{
+    ViewData["Title"] = "Stats";
+}
+
+<h2>Stats</h2>
+
+<table>
+    <tr>
+        <th></th>
+        @foreach (var rec in Model.Recommendations)
+        {
+            <th>@rec.Content</th>
+        }
+    </tr>
+    @foreach (var user in Model.Users)
+    {
+        <tr>
+            <th>@user.UserName</th>
+            @foreach (var recommendation in Model.Recommendations)
+            {
+                <td id="tableContent-@user.Id-@recommendation.Id">---</td>
+            }
+        </tr>
+    }
+</table>
