@@ -7,6 +7,6 @@ namespace IntelliMood.Services.Interfaces
 {
     public interface IRecommender
     {
-        Recommendation RecommendMusic(string userId,string mood);
+        Recommendation Recommend(string userId);
     }
 }

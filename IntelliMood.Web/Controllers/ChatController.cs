@@ -58,7 +58,7 @@ namespace IntelliMood.Web.Controllers
             var moodMessage = $"I think you are feeling {mood}";
             if (mood == "Sadness")
             {
-                var recommendation = this.recommender.RecommendMusic(currentUserId, mood);
+                var recommendation = this.recommender.Recommend(currentUserId);
                 
 
                 moodMessage += Environment.NewLine;
