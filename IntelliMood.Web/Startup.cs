@@ -55,7 +55,7 @@ namespace IntelliMood.Web
 
             services.AddMvc(config =>
             {
-                //config.Filters.Add<ColorsInCookiesFilter>();
+                config.Filters.Add<ColorsInCookiesFilter>();
             });
         }
 

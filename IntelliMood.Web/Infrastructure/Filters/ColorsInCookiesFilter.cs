@@ -9,11 +9,21 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace IntelliMood.Web.Infrastructure.Filters
 {
-    public class ColorsInCookiesFilterAttribute : Attribute, IAsyncActionFilter
+    public class ColorsInCookiesFilter :  IAsyncActionFilter
     {
         private readonly UserManager<User> userManager;
 
+        public ColorsInCookiesFilter(UserManager<User> userManager)
+        {
+            this.userManager = userManager;
+        }
+
         public async Task OnActionExecuting(ActionExecutingContext context)
+        {
+            
+        }
+
+        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             if (!context.HttpContext.Request.Cookies.ContainsKey("primaryColor"))
             {
@@ -38,11 +48,8 @@ namespace IntelliMood.Web.Infrastructure.Filters
                     context.HttpContext.Response.Cookies.Append("secondaryColor", "#00ff7f");
                 }
             }
-        }
 
-        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
-        {
-            
+            await next.Invoke();
         }
     }
 }
