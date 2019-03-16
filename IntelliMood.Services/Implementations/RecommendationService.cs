@@ -56,6 +56,8 @@ namespace IntelliMood.Services.Implementations
                 this.db.Recommendations.Add(rec);
             }
 
+            this.db.SaveChanges();
+
             this.db.UserRecommendations.Add(new UserRecommendation()
             {
                 RecommendationId = rec.Id,

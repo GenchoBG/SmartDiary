@@ -75,8 +75,7 @@ namespace IntelliMood.Services.Implementations
         private List<List<double>> GetPopulatedEmptySpots(List<List<double>> data)
         {
             var predictor = new SVDPP();
-
-            // Loading matrix of ratings from file
+            
             predictor.LoadItemsFromMatrix(data, predictor.MatrixUI);
 
             predictor.Initialize(); // Initializing the ratings prediction model

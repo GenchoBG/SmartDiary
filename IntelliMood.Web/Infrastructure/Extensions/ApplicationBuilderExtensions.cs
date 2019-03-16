@@ -114,13 +114,15 @@ namespace IntelliMood.Web.Infrastructure.Extensions
                             {
                                 foreach (var user in db.Users.ToList())
                                 {
-                                    var shouldAdd = random.Next(0, 2);
-                                    if (shouldAdd == 0)
+                                    var shouldAdd = random.Next(0, 10);
+                                    if (shouldAdd < 7)
                                     {
                                         db.UserRecommendations.Add(new UserRecommendation()
                                         {
                                             UserId = user.Id,
-                                            RecommendationId = recommendation.Id
+                                            RecommendationId = recommendation.Id,
+                                            Mood = "Bad",
+                                            Rating = random.Next(5) + 1
                                         });
                                     }
                                 }
