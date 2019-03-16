@@ -12,6 +12,7 @@ namespace IntelliMood.Data
         public DbSet<Mood> Moods { get; set; }
 
         public DbSet<Recommendation> Recommendations { get; set; }
+
         public DbSet<UserRecommendation> UserRecommendations { get; set; }
 
         public IntelliMoodDbContext(DbContextOptions<IntelliMoodDbContext> options)
