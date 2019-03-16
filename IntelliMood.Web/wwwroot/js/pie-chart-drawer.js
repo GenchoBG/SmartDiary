@@ -65,26 +65,38 @@ function drawYearlyChart(rawData) {
     chart.draw(data, options);
 }
 
-$(document).ready(function() {
-    $.ajax({
-        url: '/Stats/GetMonthly?month=3&year=2019',
-        type: 'get',
-        success: function (data) {
-            drawMonthlyChart(data);
-        },
-        error: function () {
-            console.log("Error");
-        }
-    });
+function drawCharts() {
+	$.ajax({
+		url: '/Stats/GetMonthly?month=3&year=2019',
+		type: 'get',
+		success: function (data) {
+			try {
+				drawMonthlyChart(data);
+			} catch (e) {
+				location.reload();
+			} 
+		},
+		error: function () {
+			console.log("Error");
+		}
+	});
 
-    $.ajax({
-        url: '/Stats/GetYearly?year=2019',
-        type: 'get',
-        success: function (data) {
-            drawYearlyChart(data);
-        },
-        error: function () {
-            console.log("Error");
-        }
-    });
+	$.ajax({
+		url: '/Stats/GetYearly?year=2019',
+		type: 'get',
+		success: function (data) {
+			try {
+				drawYearlyChart(data);
+			} catch (e) {
+				location.reload();
+			} 
+		},
+		error: function () {
+			console.log("Error");
+		}
+	});
+}
+
+$(document).ready(function() {
+	drawCharts();
 });
