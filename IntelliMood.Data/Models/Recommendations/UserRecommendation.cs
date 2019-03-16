@@ -20,6 +20,6 @@ namespace IntelliMood.Data.Models.Recommendations
         public string Mood { get; set; }
 
         [Required]
-        public bool IsLiked { get; set; }
+        public int Rating { get; set; }
     }
 }
