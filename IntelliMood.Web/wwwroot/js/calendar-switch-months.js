@@ -15,11 +15,11 @@ function daysInMonth(month, year) {
 
 function appendMessage(message, day, month, year) {
     if (message.isResponse) {
-        $(`#Modal-${day}-${month}-${year}`).append(
-            $(`<div class="message d-block"> <img src="../images/robot.png"> <p class="messageContent"> ${message.content.trim()
-                }</p><div class="timestamp">${message.time}</div></div> `));
+        $(`#Modal-Content-${day}-${month}-${year}`).append(
+            $(`<div class="message d-block"> <img src="../images/robot.png"> <p class="messageContent messageSmallContent"> ${message.content.trim()
+                }</p><div class="timestampSmall">${message.time}</div></div> `));
     } else {
-        $(`#Modal-${day}-${month}-${year}`).append($(`<div class="message person d-block"><p class="messageContent">${message.content.trim()}</p><div class="timestamp">${message.time}</div></div>`));
+        $(`#Modal-Content-${day}-${month}-${year}`).append($(`<div class="message person d-block"><p class="messageContent messageSmallContent">${message.content.trim()}</p><div class="timestampSmall">${message.time}</div></div>`));
     }
 }
 
@@ -57,8 +57,10 @@ function displayDays() {
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                           </div>
-                                          <div class="modal-body id='Modal-Content-${day}-${month}-${year}'">
-                                            
+                                          <div class="modal-body">
+                                            <div class="modalChatPreview" id='Modal-Content-${day}-${month}-${year}'>
+                                                
+                                            </div>
                                           </div>
                                           <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
