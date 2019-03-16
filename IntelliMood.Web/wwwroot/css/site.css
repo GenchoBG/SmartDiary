@@ -167,6 +167,10 @@ body, html {
     font-size: 8pt;
 }
 
+.person .timestamp {
+    text-align: right;
+}
+
 .noresize {
     resize: none;
 }
