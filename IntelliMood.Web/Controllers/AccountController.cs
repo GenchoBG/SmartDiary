@@ -231,6 +231,7 @@ namespace IntelliMood.Web.Controllers
                     SecondaryColor = "#00ff7f"
 
                 };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

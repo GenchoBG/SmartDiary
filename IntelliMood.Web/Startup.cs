@@ -8,6 +8,7 @@ using IntelliMood.Data.Models;
 using IntelliMood.Services;
 using IntelliMood.Services.Implementations;
 using IntelliMood.Services.Interfaces;
+using IntelliMood.Web.Infrastructure.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -51,7 +52,10 @@ namespace IntelliMood.Web
 
             services.AddAutoMapper();
 
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                //config.Filters.Add<ColorsInCookiesFilter>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

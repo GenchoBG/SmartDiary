@@ -123,7 +123,7 @@ namespace IntelliMood.Web.Controllers
             var secondaryColor = user.SecondaryColor;
             if (model.SecondaryColor != secondaryColor)
             {
-                user.SecondaryColor = model.SecondaryColor;
+                user.SecondaryColor = model.SecondaryColor ;
                 var setDiaryNameResult = await this._userManager.UpdateAsync(user);
 
                 if (!setDiaryNameResult.Succeeded)
@@ -143,6 +143,7 @@ namespace IntelliMood.Web.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
                 }
             }
+
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }
