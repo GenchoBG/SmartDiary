@@ -133,11 +133,16 @@ body, html {
     border-radius: 45px;
     color: #00ff7f;
     margin-bottom: 0;
+	display: inline-block;
+}
+.imgBot {
+	display: inline-block;
 }
 
 .timestamp {
     font-size: 8pt;
     float: right;
+	display: block;
 }
 
 .noresize {
