@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\dropdown.js" />
     <Content Remove="wwwroot\js\menu.js" />
   </ItemGroup>
 
