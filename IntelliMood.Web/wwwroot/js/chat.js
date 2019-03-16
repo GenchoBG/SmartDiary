@@ -12,7 +12,8 @@ function scrollToBottom() {
 }
 
 function clearChatBox() {
-    $("#chatBox").val("");
+    $("#chatBox").val('');
+    console.log($("#chatBox").val());
 }
 
 function DisplayCurrentTime(date) {
@@ -33,7 +34,7 @@ $("#enterBtn").on("click",
     function (event) {
 
         let val = $("#chatBox").val();
-        
+        clearChatBox(val);
 
         appendMessage({
             content: val,
@@ -42,8 +43,7 @@ $("#enterBtn").on("click",
         });
         console.log(val);
         scrollToBottom();
-
-        clearChatBox(val);
+        
         $.ajax({
             url: '/Chat/CreateMessage',
             type: 'post',
@@ -65,17 +65,26 @@ $("#enterBtn").on("click",
                 console.log("Error");
             }
         });
-
         event.preventDefault();
     });
 
 $("#chatBox").on("keypress", function (event) {
     if (event.which === 13) {
-        $("#enterBtn").click();
+        if (!event.shiftKey)
+        {
+            $("#enterBtn").click();
+        }
+        event.preventDefault();
     }
+    
 });
 
+function FocusTextarea() {
+    $("#chatBox").focus();
+}
+
 $(document).ready(function () {
+    FocusTextarea();
     $.ajax({
         url: '/Chat/GetMessages',
         type: 'get',
