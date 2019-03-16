@@ -1,9 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var primary = this.Context.Request.Cookies["primaryColor"];
+    var secondary = this.Context.Request.Cookies["secondaryColor"];
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - IntelliMood.Web</title>
+
 
     <environment include="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
@@ -15,6 +21,20 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <style>
+        .primaryColor {
+            background-color: @primary;
+        }
+
+        .secondaryColor{
+            color: @secondary;
+        }
+
+        #enterBtn {
+            border-color: @secondary;
+            color: @secondary;
+        }
+    </style>
 </head>
 <body>
     @if (!User.Identity.IsAuthenticated)
@@ -26,7 +46,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto">S
                     <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
@@ -39,9 +59,9 @@
         <div class="row" id="contentPage">
             <!-- Sidebar -->
             <div class="col-2">
-                <div class="sidebar">
+                <div class="sidebar primaryColor">
                     <div>
-                        <p id="menuHeader">Menu</p>
+                        <p id="menuHeader" class="secondaryColor">Menu</p>
                     </div>
                     <div class="linkSidebar">
                         <div class="text">
