@@ -6,38 +6,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - IntelliMood</title>
+	<link href="https://fonts.googleapis.com/css?family=Sniglet" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - IntelliMood</title>
 
 
-    <environment include="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    </environment>
-    <style>
-        .primaryColor {
-            background-color: @primary;
-        }
+	<environment include="Development">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="~/css/site.css" />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	</environment>
+	<environment exclude="Development">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+		<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	</environment>
+	<style>
+		.primaryColor {
+			background-color: @primary;
+		}
 
-        .secondaryColor{
-            color: @secondary;
-        }
+		.secondaryColor {
+			color: @secondary;
+		}
 
-        #enterBtn {
-            border-color: @secondary;
-            color: @secondary;
-        }
-    </style>
+		#enterBtn {
+			border-color: @secondary;
+			color: @secondary;
+		}
+	</style>
 </head>
 <body>
     @if (!User.Identity.IsAuthenticated)
@@ -112,10 +113,10 @@
         <footer style="bottom: 0; position: fixed; display: block;">
 	        <address class="link"><a href="https://github.com/GenchoBG/SmartDiary/"><i class="fab fa-github"></i></a></address>
 			<address class="dev-team">
-				<strong>Front-End and Back-End:</strong> Aneta Tsvetkova<br />
-				<strong>Front-End, Back-End and ML:</strong>  Evgeni Dimov<br />
-				<strong>Front-End, Back-End: </strong> Kalin Doychev<br />
-				<strong>Front-End, Back-End and ML:</strong>  Kostadin Kostadinov<br />
+				<strong>Aneta Tsvetkova</strong> - Frond-End and Back-End <br/>
+				<strong>Evgeni Dimov</strong> - Front-End, Back-End and ML <br/>
+				<strong>Kalin Doychev </strong> - Front-End and Back-End <br/>
+				<strong>Kostadin Kostadinov</strong> - Front-End, Back-End and ML<br/>
 			</address>
             <p>&copy; 2019 - IntelliMood</p>
         </footer>
