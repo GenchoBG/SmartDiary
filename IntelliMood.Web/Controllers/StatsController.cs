@@ -21,6 +21,13 @@ namespace IntelliMood.Web.Controllers
             return this.View();
         }
 
+        public IActionResult GetDaily(int day, int month, int year)
+        {
+            var moods = this.moodService.GetAllDaily(day, month, year).Select(m => m.Type).ToList();
+
+            return this.Json(moods);
+        }
+
         public IActionResult GetMonthly(int month, int year)
         {
             var moods = this.moodService.GetAllMonthly(month, year).Select(m => m.Type).ToList();
