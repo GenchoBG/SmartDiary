@@ -64,7 +64,9 @@ namespace IntelliMood.Web.Controllers
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage,
-                DiaryName = user.DiaryName
+                DiaryName = user.DiaryName,
+                PrimaryColor = user.PrimaryColor,
+                SecondaryColor = user.SecondaryColor
             };
 
             return View(model);
@@ -106,6 +108,30 @@ namespace IntelliMood.Web.Controllers
             }
 
 
+            var primaryColor = user.PrimaryColor;
+            if (model.PrimaryColor != primaryColor)
+            {
+                user.PrimaryColor = model.PrimaryColor;
+                var setDiaryNameResult = await this._userManager.UpdateAsync(user);
+
+                if (!setDiaryNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                }
+            }
+
+            var secondaryColor = user.SecondaryColor;
+            if (model.SecondaryColor != secondaryColor)
+            {
+                user.SecondaryColor = model.SecondaryColor ;
+                var setDiaryNameResult = await this._userManager.UpdateAsync(user);
+
+                if (!setDiaryNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                }
+            }
+
             var diaryName = user.DiaryName;
             if (model.DiaryName != diaryName)
             {
@@ -117,6 +143,7 @@ namespace IntelliMood.Web.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
                 }
             }
+
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }
