@@ -71,5 +71,15 @@ namespace IntelliMood.Web.Controllers
 
             return this.Json(this.chatService.GetMessagesForUser(currentUserId, DateTime.Now).ProjectTo<MessageListViewModel>().ToList());
         }
+
+        [HttpGet]
+        public IActionResult GetMessagesForDay(int day, int month, int year)
+        {
+            var currentUserId = this.userManager.GetUserId(this.User);
+
+            var messages = this.chatService.GetMessagesForUser(currentUserId, new DateTime(year, month, day)).ToList();
+
+            return this.Json(messages.AsQueryable().ProjectTo<MessageListViewModel>().ToList());
+        }
     }
 }
