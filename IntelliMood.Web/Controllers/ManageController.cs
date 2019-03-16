@@ -144,6 +144,9 @@ namespace IntelliMood.Web.Controllers
                 }
             }
 
+            this.HttpContext.Response.Cookies.Append("primaryColor", user.PrimaryColor);
+            this.HttpContext.Response.Cookies.Append("secondaryColor", user.SecondaryColor);
+
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }

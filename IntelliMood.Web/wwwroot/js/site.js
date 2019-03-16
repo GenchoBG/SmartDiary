@@ -14,5 +14,9 @@
     return "";
 }
 
-console.log(getCookie("primaryColor"));
-console.log(getCookie("secondaryColor"));
+function getColors() {
+    return {
+        primaryColor: getCookie("primaryColor"),
+        secondaryColor: getCookie("secondaryColor")
+    }
+}
