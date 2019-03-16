@@ -170,3 +170,17 @@ body, html {
     direction: ltr;
     max-height: 80vh;
 }
+
+/* Home page */
+@keyframes text-appear{
+    0% {
+        transform: translateX(0) scale(2);
+    }
+    100% {
+        transform: translateX(100px) scale(1);
+    }
+}
+#welcome-text {
+    font-size: 20px;
+    animation: text-appear 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
