@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using IntelliMood.Web.Infrastructure.Filters;
 using Microsoft.AspNetCore.Mvc;
 using IntelliMood.Web.Models;
 
