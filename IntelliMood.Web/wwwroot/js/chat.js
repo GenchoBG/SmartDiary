@@ -1,6 +1,14 @@
 ﻿function appendMessage(message) {
-    $("#messages").append($(`<div class="message"><p class="messageContent">${message.content.trim()}</p><div class="timestamp">${message.time}</div></div>`)
-        .addClass(message.isResponse ? "d-block" : "person d-block"));
+	if (message.isResponse) {
+		$("#messages").append(
+			$(` <div class="message"><img src="../images/robot.png"><p class="messageContent">${message.content.trim()
+				}</p><div class="timestamp">${message.time}</div></div>`));
+	} else
+	{
+		$("#messages").append($(`<div class="message"><p class="messageContent">${message.content.trim()}</p><div class="timestamp">${message.time}</div></div>`)
+			.addClass(message.isResponse ? "d-block" : "person d-block"));
+	}
+	
 }
 
 function clearMessages() {
