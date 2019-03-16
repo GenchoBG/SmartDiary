@@ -1,10 +1,9 @@
 ﻿function appendMessage(message) {
     $("#messages").append($(`<div class="message"><p class="messageContent">${message.content.trim()}</p><div class="timestamp">${message.time}</div></div>`)
-            .addClass(message.isResponse ? "d-block" : "person d-block"));
+        .addClass(message.isResponse ? "d-block" : "person d-block"));
 }
 
-function clearMessages()
-{
+function clearMessages() {
     $("#messages").html("");
 }
 
@@ -16,29 +15,53 @@ function clearChatBox() {
     $("#chatBox").val("");
 }
 
+function DisplayCurrentTime(date) {
+    console.log(date);
+
+    var hours = date.getHours();
+    var ampm = "am";
+    if (hours > 12) {
+        hours -= 12;
+        ampm = "pm";
+    }
+    var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+
+    return `${hours}:${minutes} ${ampm}`;
+};
+
 $("#enterBtn").on("click",
-    function(event) {
+    function (event) {
 
-        console.log($("#chatBox").val());
+        let val = $("#chatBox").val();
+        
 
+        appendMessage({
+            content: val,
+            isResponse: false,
+            time: DisplayCurrentTime(new Date(Date.now()))
+        });
+        console.log(val);
+        scrollToBottom();
+
+        clearChatBox(val);
         $.ajax({
             url: '/Chat/CreateMessage',
             type: 'post',
             dataType: 'json',
             data: {
-                'message': $("#chatBox").val()
+                'message': val
             },
             success: function (messageData) {
                 var message = messageData.myMessage;
                 var response = messageData.response;
                 console.log("SUCCESS");
-                clearChatBox();
-                appendMessage(message);
+
+
                 appendMessage(response);
 
                 scrollToBottom();
             },
-            error: function() {
+            error: function () {
                 console.log("Error");
             }
         });
@@ -46,14 +69,13 @@ $("#enterBtn").on("click",
         event.preventDefault();
     });
 
-$("#chatBox").on("keypress", function(event) 
-{
+$("#chatBox").on("keypress", function (event) {
     if (event.which === 13) {
         $("#enterBtn").click();
     }
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     $.ajax({
         url: '/Chat/GetMessages',
         type: 'get',

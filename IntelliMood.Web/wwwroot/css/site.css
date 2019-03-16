@@ -113,10 +113,7 @@ body, html {
 }
 
 #logoutbtn {
-    display: block;
-    position: relative;
-    width: 36%;
-    margin: 5% auto;
+    padding-top: 2%;
 }
 
 .person {
@@ -130,6 +127,7 @@ body, html {
 }
 
 .messageContent {
+    font-size: 15pt;
     padding: 10px 20px;
     background-color: black;
     border-radius: 45px;
