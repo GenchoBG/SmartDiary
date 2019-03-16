@@ -1,13 +1,18 @@
 ﻿@{
     ViewData["Title"] = "Index";
 }
-
-<div class="calendar" style="text-align: center; padding-top: 20px;">
-    <button id="btn-back" type="button" class="btn btn-outline-primary"> < </button>
-    <p id="month-name"></p>
-    <button id="btn-forward" type="button" class="btn btn-outline-primary"> > </button>
-    <div id="year"></div>
-    <div id="calendar-days"></div>
+<div class="fullPage">
+    <div class="calendar">
+        <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_open()">
+            >
+        </button>
+        <button id="btn-back" type="button" class="btn btn-outline-primary"> < </button>
+        <p id="month-name"></p>
+        <button id="btn-forward" type="button" class="btn btn-outline-primary"> > </button>
+        <div id="year"></div>
+        <div id="year"></div>
+        <div id="calendar-days"></div>
+    </div>
 </div>
 
 @section Scripts{

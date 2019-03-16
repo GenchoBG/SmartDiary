@@ -1,26 +1,31 @@
-﻿<link rel="stylesheet" href="css/chat.css">
-@model ChatIndexViewModel
+﻿@model ChatIndexViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
 <div class="w-100">
-    <h2 class="display-4">@Model.DiaryName</h2>
-    <div id="sideMenu"></div>
-    <div>
-        <div class="w-100 d-block">
-            <div id="messages">
-                Loading...
-            </div>
+    <div class="row small">
+        <div class="col align-self-center">
+            <button class="w3-button w3-xlarge w3-hide-large" onclick="w3_open()">☰</button>
         </div>
-        <div id="inputArea" class="form-group">
-            <div class="input-group">
-                <textarea class="form-control noresize" type="text" id="chatBox" rows="1" placeholder="Type to chat with @Model.DiaryName"></textarea>
+        <div class="col">
+            <h2 class="display-4">@Model.DiaryName</h2>
+        </div>
+    </div>
+    <div class="big"><h2 class="display-4">@Model.DiaryName</h2></div>
+    <div id="sideMenu"></div>
+    <div class="w-100 d-block">
+        <div id="messages">
+            Loading...
+        </div>
+    </div>
+    <div id="inputArea" class="form-group">
+        <div class="input-group">
+            <textarea class="form-control noresize" type="text" id="chatBox" rows="1" placeholder="Type to chat with @Model.DiaryName"></textarea>
 
-                <span class="input-group-btn">
-                    <button id="enterBtn" class="btn btn-outline-primary">Enter</button>
-                </span>
-            </div>
+            <span class="input-group-btn">
+                <button id="enterBtn" class="btn btn-outline-primary">Enter</button>
+            </span>
         </div>
     </div>
 </div>
