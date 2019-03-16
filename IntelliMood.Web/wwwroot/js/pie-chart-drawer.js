@@ -65,7 +65,8 @@ function drawYearlyChart(rawData) {
     chart.draw(data, options);
 }
 
-$(document).ready(function() {
+$(window).on("load", function () {
+    setTimeout(1000);
     $.ajax({
         url: '/Stats/GetMonthly?month=3&year=2019',
         type: 'get',
