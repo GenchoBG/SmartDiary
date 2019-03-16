@@ -13,13 +13,39 @@ function daysInMonth(month, year) {
     return new Date(year, month + 1, 0).getDate();
 }
 
+function appendMessage(message, day, month, year) {
+    if (message.isResponse) {
+        $(`#Modal-${day}-${month}-${year}`).append(
+            $(`<div class="message d-block"> <img src="../images/robot.png"> <p class="messageContent"> ${message.content.trim()
+                }</p><div class="timestamp">${message.time}</div></div> `));
+    } else {
+        $(`#Modal-${day}-${month}-${year}`).append($(`<div class="message person d-block"><p class="messageContent">${message.content.trim()}</p><div class="timestamp">${message.time}</div></div>`));
+    }
+}
+
+function printday(day, month, year) {
+    $.ajax({
+        url: `/Chat/GetMessagesForDay?day=${day}&month=${month+1}&year=${year}`,
+        type: 'get',
+        success: function (data) {
+            console.log(data);
+            for (let message of data) {
+                appendMessage(message, day, month, year);
+            }
+        },
+        error: function () {
+            console.log("Error");
+        }
+    });
+}
+
 function displayDays() {
     var todayButton = "primary";
     for (let day = 1; day <= days; day++) {
         if (day == today.getDate() && month == today.getMonth() && year == today.getFullYear()) {
             todayButton = "warning";
         }
-        daysDiv.innerHTML += `<button type="button" class="btn btn-outline-${todayButton} circular-btn" data-toggle="modal" data-target=".bd-example-modal-lg-${day}-${month}-${year}"><div class="day">${day}</div></button>
+        daysDiv.innerHTML += `<button type="button" onclick="printday(${day}, ${month}, ${year})" class="btn btn-outline-${todayButton} circular-btn" data-toggle="modal" data-target=".bd-example-modal-lg-${day}-${month}-${year}"><div class="day">${day}</div></button>
 
                                 <div class="modal fade bd-example-modal-lg-${day}-${month}-${year}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -31,8 +57,8 @@ function displayDays() {
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                           </div>
-                                          <div class="modal-body">
-                                            ...
+                                          <div class="modal-body id='Modal-Content-${day}-${month}-${year}'">
+                                            
                                           </div>
                                           <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

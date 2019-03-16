@@ -29,6 +29,11 @@ namespace IntelliMood.Services.Implementations
             this.db.SaveChanges();
         }
 
+        public IQueryable<Mood> GetAllDaily(int day, int month, int year)
+        {
+            return this.db.Moods.Where(m => m.DateTime.Day == day && m.DateTime.Month == month && m.DateTime.Year == year).AsQueryable();
+        }
+
         public IQueryable<Mood> GetAllMonthly(int month, int year)
         {
             return this.db.Moods.Where(m => m.DateTime.Month == month && m.DateTime.Year == year).AsQueryable();
