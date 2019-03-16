@@ -20,14 +20,18 @@ namespace IntelliMood.Web.Controllers
 		private readonly IMapper mapper;
         private readonly IEmotionGetter emotionGetter;
         private readonly IMoodService moodService;
+        private readonly IRecommendationService recommendationService;
+        private readonly IRecommender recommender;
 
-        public ChatController(IChatService chatService, UserManager<User> userManager, IMapper mapper, IEmotionGetter emotionGetter, IMoodService moodService)
+        public ChatController(IChatService chatService, UserManager<User> userManager, IMapper mapper, IEmotionGetter emotionGetter, IMoodService moodService, IRecommender recommender, IRecommendationService recommendationService)
         {
             this.chatService = chatService;
             this.userManager = userManager;
             this.mapper = mapper;
             this.emotionGetter = emotionGetter;
             this.moodService = moodService;
+            this.recommender = recommender;
+            this.recommendationService = recommendationService;
         }
         
         public async Task<IActionResult> Index()
@@ -51,7 +55,28 @@ namespace IntelliMood.Web.Controllers
             var message = this.chatService.AddMessage(data.Message, currentUserId, false);
 
             var mood = this.emotionGetter.GetEmotionFromText(data.Message);
-            var moodMessage = $"You are feeling {mood}";
+            var moodMessage = $"I think you are feeling {mood}";
+            if (mood == "Sadness")
+            {
+                var recommendation = this.recommender.RecommendMusic(currentUserId, mood);
+                
+
+                moodMessage += Environment.NewLine;
+                moodMessage += $"I think {recommendation.Content} will make you feel better!";
+                moodMessage += Environment.NewLine;
+
+                var response = this.chatService.AddMessage(moodMessage, currentUserId, true);
+
+                return this.Json(new
+                {
+                    myMessage = this.mapper.Map<MessageListViewModel>(message),
+                    response = this.mapper.Map<MessageListViewModel>(response),
+                    hasRecommendation = mood == "Sadness",
+                    recommendationId = recommendation.Id
+                });
+
+            }
+            
             var responseMessage = this.chatService.AddMessage(moodMessage, currentUserId, true);
 
             this.moodService.Add(currentUserId, mood);
@@ -61,7 +86,8 @@ namespace IntelliMood.Web.Controllers
             {
                 myMessage = this.mapper.Map<MessageListViewModel>(message),
                 response = this.mapper.Map<MessageListViewModel>(responseMessage),
-            }); //recommendation json response
+                hasRecommendation = mood == "Sadness"
+            }); 
         }
 
         [HttpGet]
@@ -80,6 +106,26 @@ namespace IntelliMood.Web.Controllers
             var messages = this.chatService.GetMessagesForUser(currentUserId, new DateTime(year, month, day)).ToList();
 
             return this.Json(messages.AsQueryable().ProjectTo<MessageListViewModel>().ToList());
+        }
+
+        [HttpPost]
+        public IActionResult AddRating(int recommendationId, int rating)
+        {
+            var currentUserId = this.userManager.GetUserId(this.User);
+
+            this.recommendationService.AddRating(currentUserId, recommendationId, rating);
+
+            return this.Ok();
+        }
+
+        [HttpPost]
+        public IActionResult AddRecommendationWithRating(string recommendation, int rating)
+        {
+            var currentUserId = this.userManager.GetUserId(this.User);
+
+            this.recommendationService.AddRecommendationWithRating(currentUserId, recommendation, rating);
+
+            return this.Ok();
         }
     }
 }
