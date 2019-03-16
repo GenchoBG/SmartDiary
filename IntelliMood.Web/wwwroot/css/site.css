@@ -61,6 +61,7 @@ body, html {
     left: 0;
     top: 0;
 }
+
 .linkSidebar{
     font-size:16px;
     font-weight:300;
@@ -111,7 +112,6 @@ body, html {
 
 #menuHeader {
     text-align: center;
-    color: #00ff7f;
 }
 
 #contentPage {
@@ -136,11 +136,17 @@ body, html {
 .messageContent {
     font-size: 15pt;
     padding: 10px 20px;
-    background-color: black;
     border-radius: 45px;
-    color: #00ff7f;
     margin-bottom: 0;
 	display: inline-block;
+}
+
+.primaryColor {
+    background-color: black;
+}
+
+.secondaryColor {
+    color: #00ff7f;
 }
 
 .messageSmallContent {
@@ -159,6 +165,10 @@ body, html {
 .timestamp {
     display: block;
     font-size: 8pt;
+}
+
+.person .timestamp {
+    text-align: right;
 }
 
 .noresize {

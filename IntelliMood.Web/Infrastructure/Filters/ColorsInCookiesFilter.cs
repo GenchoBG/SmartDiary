@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IntelliMood.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace IntelliMood.Web.Infrastructure.Filters
@@ -30,20 +31,30 @@ namespace IntelliMood.Web.Infrastructure.Filters
                 if (context.HttpContext.User.Identity.IsAuthenticated)
                 {
                     var user = await this.userManager.FindByNameAsync(context.HttpContext.User.Identity.Name);
-
+                    var controller = context.Controller as Controller;
                     if (user.PrimaryColor == null)
                     {
                         context.HttpContext.Response.Cookies.Append("primaryColor", "#000000");
                         context.HttpContext.Response.Cookies.Append("secondaryColor", "#00ff7f");
+                        controller.TempData["primaryColor"] = "#000000";
+                        controller.TempData["secondaryColor"] = "#00ff7f";
+
                     }
                     else
                     {
                         context.HttpContext.Response.Cookies.Append("primaryColor", user.PrimaryColor);
                         context.HttpContext.Response.Cookies.Append("secondaryColor", user.SecondaryColor);
+
+                        controller.TempData["primaryColor"] = user.PrimaryColor;
+                        controller.TempData["secondaryColor"] = user.SecondaryColor;
                     }
                 }
                 else
                 {
+                    var controller = context.Controller as Controller;
+                    controller.TempData["primaryColor"] = "#000000";
+                    controller.TempData["secondaryColor"] = "#00ff7f";
+
                     context.HttpContext.Response.Cookies.Append("primaryColor", "#000000");
                     context.HttpContext.Response.Cookies.Append("secondaryColor", "#00ff7f");
                 }
