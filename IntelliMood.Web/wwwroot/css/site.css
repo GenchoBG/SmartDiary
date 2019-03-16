@@ -194,17 +194,60 @@ body, html {
 }
 
 /* Home page */
-@keyframes text-appear {
-    0% {
-        transform: translateX(0) scale(2);
+@keyframes right-slide {
+    from {
+        transform: translateX(-400px);
+        opacity: 0;
     }
 
-    100% {
-        transform: translateX(100px) scale(1);
+    to {
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
+@keyframes left-slide {
+    from{
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.link {
+    position: fixed;
+    bottom: 10px;
+    font-size: 15px;  
+}
+
+.link:hover {
+    text-decoration: none;
+}
+
+.parent {
+    display: flex;
+}
+
+.text-side {
+    flex: 1;
+}
+
+.carousel-side {
+    flex:1;
+}
+
 #welcome-text {
+    padding: 0 10px;
+    text-align: justify;
+    font-size: 20px; 
+    animation: right-slide 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+#about-text {
+    text-align: justify;
     font-size: 20px;
-    animation: text-appear 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: left-slide 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }

@@ -12,9 +12,10 @@ using System;
 namespace IntelliMood.Data.Migrations
 {
     [DbContext(typeof(IntelliMoodDbContext))]
-    partial class IntelliMoodDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190316131327_userrecommendationrecommendationidisstring")]
+    partial class userrecommendationrecommendationidisstring
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

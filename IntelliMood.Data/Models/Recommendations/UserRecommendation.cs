@@ -14,7 +14,7 @@ namespace IntelliMood.Data.Models.Recommendations
         public string UserId { get; set; }
 
         [Required]
-        public string RecommendationId { get; set; }
+        public int RecommendationId { get; set; }
 
         [Required]
         public string Mood { get; set; }
