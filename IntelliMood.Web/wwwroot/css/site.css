@@ -80,6 +80,9 @@ body, html {
     float: right !important;
 }
 
+#thanks-alert {
+	display: none;
+}
 .message {
     padding: auto 0;
     display: block;
