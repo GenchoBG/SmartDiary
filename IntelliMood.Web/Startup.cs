@@ -8,6 +8,7 @@ using IntelliMood.Data.Models;
 using IntelliMood.Services;
 using IntelliMood.Services.Implementations;
 using IntelliMood.Services.Interfaces;
+using IntelliMood.Web.Infrastructure.Extensions;
 using IntelliMood.Web.Infrastructure.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -74,6 +75,8 @@ namespace IntelliMood.Web
             }
 
             app.UseStaticFiles();
+
+            app.Seed();
 
             app.UseAuthentication();
 
