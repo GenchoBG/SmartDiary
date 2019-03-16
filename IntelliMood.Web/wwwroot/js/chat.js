@@ -1,8 +1,8 @@
 ﻿function appendMessage(message) {
 	if (message.isResponse) {
 		$("#messages").append(
-			$(`<div class="message d-block"> <img src="../images/robot.png"> <p class="messageContent"> ${message.content.trim()
-				}</p><div class="timestamp">${message.time}</div></div> `));
+            $(`<div class="message d-block"><img src="../images/robot.png" class="imgBot"> <p class="messageContent"> ${message.content.trim()
+				}</p><div class="timestamp">${message.time}</div></div>`));
 	} else
 	{
 		$("#messages").append($(`<div class="message person d-block"><p class="messageContent">${message.content.trim()}</p><div class="timestamp">${message.time}</div></div>`));
@@ -15,7 +15,8 @@ function clearMessages() {
 }
 
 function scrollToBottom() {
-    $("#messages").animate({ scrollTop: $('#messages').prop('scrollHeight') }, 500);
+    var heightMessages = $('#messages').prop('scrollHeight') * 2;
+    $("#messages").animate({ scrollTop: heightMessages }, 1000);
 }
 
 function clearChatBox() {
@@ -39,40 +40,41 @@ function DisplayCurrentTime(date) {
 
 $("#enterBtn").on("click",
     function (event) {
+        if ($("#chatBox").val()) {
+            let val = $("#chatBox").val();
+            clearChatBox(val);
 
-        let val = $("#chatBox").val();
-        clearChatBox(val);
+            appendMessage({
+                content: val,
+                isResponse: false,
+                time: DisplayCurrentTime(new Date(Date.now()))
+            });
+            console.log(val);
+            scrollToBottom();
 
-        appendMessage({
-            content: val,
-            isResponse: false,
-            time: DisplayCurrentTime(new Date(Date.now()))
-        });
-        console.log(val);
-        scrollToBottom();
-        
-        $.ajax({
-            url: '/Chat/CreateMessage',
-            type: 'post',
-            dataType: 'json',
-            data: {
-                'message': val
-            },
-            success: function (messageData) {
-                var message = messageData.myMessage;
-                var response = messageData.response;
-                console.log("SUCCESS");
+            $.ajax({
+                url: '/Chat/CreateMessage',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    'message': val
+                },
+                success: function (messageData) {
+                    var message = messageData.myMessage;
+                    var response = messageData.response;
+                    console.log("SUCCESS");
 
 
-                appendMessage(response);
+                    appendMessage(response);
 
-                scrollToBottom();
-            },
-            error: function () {
-                console.log("Error");
-            }
-        });
-        event.preventDefault();
+                    scrollToBottom();
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+            event.preventDefault();
+        }
     });
 
 $("#chatBox").on("keypress", function (event) {
