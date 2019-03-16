@@ -58,7 +58,6 @@ function drawYearlyChart(rawData) {
     }
 
     console.log(arr);
-
     var data = google.visualization.arrayToDataTable(arr);
 
     var options = { 'title': 'Yearly', 'width': 550, 'height': 400 };

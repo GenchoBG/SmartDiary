@@ -25,6 +25,8 @@ namespace IntelliMood.Services.Implementations
                 UserId = userId,
                 Type = mood
             });
+
+            this.db.SaveChanges();
         }
 
         public IQueryable<Mood> GetAllMonthly(int month, int year)

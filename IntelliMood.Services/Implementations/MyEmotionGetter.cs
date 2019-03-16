@@ -31,39 +31,30 @@ namespace IntelliMood.Services.Implementations
         }
 
         private static readonly string TrainDataPath = Path.Combine(Environment.CurrentDirectory, "../IntelliMood.Services/Datasets", "train_data.csv");
-        private static readonly string TestDataPath = Path.Combine(Environment.CurrentDirectory, "", "wikipedia-detox-250-line-test.tsv.txt");
         private static readonly string ModelPath = Path.Combine(Environment.CurrentDirectory, "", "Model.zip");
         private static TextLoader textLoader;
+        private static MLContext mlContext;
+        private static PredictionEngine<SentimentData, SentimentPrediction> predictionFunction;
 
         public MyEmotionGetter()
         {
-            var mlContext = new MLContext();
+            mlContext = new MLContext();
 
-            textLoader = mlContext.Data.CreateTextLoader(separatorChar: '\t', hasHeader: true, columns: new[]
-            {
-                new TextLoader.Column("Label", DataKind.Boolean, 0),
-                new TextLoader.Column("SentimentText", DataKind.String, 1)
-            });
+            //            textLoader = mlContext.Data.CreateTextLoader(separatorChar: '\t', hasHeader: true, columns: new[]
+            //            {
+            //                new TextLoader.Column("Label", DataKind.Boolean, 0),
+            //                new TextLoader.Column("SentimentText", DataKind.String, 1)
+            //            });
 
-            var model = Train(mlContext, TrainDataPath);
-            //var model = this.LoadFromFile(mlContext);
+            //            var model = Train(mlContext, TrainDataPath);
+            var model = this.LoadFromFile();
 
-            var predictionFunction = model.CreatePredictionEngine<SentimentData, SentimentPrediction>(mlContext);
-
-            while (true)
-            {
-                var text = Console.ReadLine();
-
-                Console.WriteLine(predictionFunction.Predict(new SentimentData()
-                {
-                    SentimentText = text
-                }).Prediction ? "Positive" : "Negative");
-            }
+            predictionFunction = model.CreatePredictionEngine<SentimentData, SentimentPrediction>(mlContext);
 
             //Evaluate(mlContext, model);
         }
 
-        private ITransformer LoadFromFile(MLContext mlContext)
+        private ITransformer LoadFromFile()
         {
             using (var stream = new FileStream(ModelPath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
@@ -98,29 +89,12 @@ namespace IntelliMood.Services.Implementations
             Console.WriteLine("The model is saved to {0}", ModelPath);
         }
 
-        private static void Evaluate(MLContext mlContext, ITransformer model)
-        {
-            var testData = textLoader.Load(TestDataPath);
-
-            Console.WriteLine("=============== Evaluating Model accuracy with Test data===============");
-            var predictions = model.Transform(testData);
-
-            var metrics = mlContext.BinaryClassification.Evaluate(predictions, "Label");
-
-            Console.WriteLine();
-            Console.WriteLine("Model quality metrics evaluation");
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine($"Accuracy: {metrics.Accuracy:P2}");
-            Console.WriteLine($"Auc: {metrics.Auc:P2}");
-            Console.WriteLine($"F1Score: {metrics.F1Score:P2}");
-            Console.WriteLine("=============== End of model evaluation ===============");
-
-            SaveModelAsFile(mlContext, model);
-        }
-
         public string GetEmotionFromText(string text)
         {
-            throw new NotImplementedException();
+            return predictionFunction.Predict(new SentimentData()
+            {
+                SentimentText = text
+            }).Prediction ? "Happiness" : "Sadness";
         }
     }
 }

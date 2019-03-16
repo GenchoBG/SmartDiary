@@ -113,10 +113,7 @@ body, html {
 }
 
 #logoutbtn {
-    display: block;
-    position: relative;
-    width: 36%;
-    margin: 5% auto;
+    padding-top: 2%;
 }
 
 .person {
@@ -130,16 +127,22 @@ body, html {
 }
 
 .messageContent {
+    font-size: 15pt;
     padding: 10px 20px;
     background-color: black;
     border-radius: 45px;
     color: #00ff7f;
     margin-bottom: 0;
+	display: inline-block;
+}
+.imgBot {
+	display: inline-block;
 }
 
 .timestamp {
     font-size: 8pt;
     float: right;
+	display: block;
 }
 
 .noresize {
