@@ -6,26 +6,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="https://fonts.googleapis.com/css?family=Sniglet" rel="stylesheet">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - IntelliMood</title>
+    <link href="https://fonts.googleapis.com/css?family=Sniglet" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IntelliMood</title>
 
 
-	<environment include="Development">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="~/css/site.css" />
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	</environment>
-	<environment exclude="Development">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-			  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-		<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	</environment>
-	<style>
+    <environment include="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </environment>
+    <style>
 		.primaryColor {
 			background-color: @primary;
 		}
@@ -38,7 +38,7 @@
 			border-color: @secondary;
 			color: @secondary;
 		}
-	</style>
+    </style>
 </head>
 <body>
     @if (!User.Identity.IsAuthenticated)
@@ -52,8 +52,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
-                </ul>
-                <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contacts</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
@@ -113,8 +111,9 @@
     @if (!User.Identity.IsAuthenticated)
     {
         <hr />
- 		<footer>
-            <p>&copy; 2019 - IntelliMood.Web</p>        </footer>
+        <footer>
+            <p>&copy; 2019 - IntelliMood.Web</p>
+        </footer>
     }
 
 
@@ -138,7 +137,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-	<script src="js/push-notificator.js"></script>
+    <script src="js/push-notificator.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

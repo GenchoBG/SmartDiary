@@ -183,6 +183,7 @@ body, html {
 #messages {
     overflow-y: auto;
     direction: ltr;
+    display: block;
     height: 80vh;
 }
 
