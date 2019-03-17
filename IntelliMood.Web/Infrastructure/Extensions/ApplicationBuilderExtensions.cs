@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IntelliMood.Data;
@@ -29,41 +30,75 @@ namespace IntelliMood.Web.Infrastructure.Extensions
                     {
                         if (!db.Recommendations.Any())
                         {
-                            var izlez = new Recommendation()
+                            var outside = new Recommendation()
                             {
-                                Content = "Izlez navun zagubenqk",
+                                Content = "Take a walk outside",
                                 Type = RecommendationTypes.Activity
                             };
 
-                            var kniga = new Recommendation()
+                            var shower = new Recommendation()
                             {
-                                Content = "4 books of amazon success",
-                                Type = RecommendationTypes.Book
+                                Content = "Take a cold shower",
+                                Type = RecommendationTypes.Activity
                             };
 
-                            var film = new Recommendation()
+                            var recommendations = new List<Recommendation>();
+
+                            recommendations.Add(new Recommendation()
+                            {
+                                Content = "WarCross",
+                                Type = RecommendationTypes.Book
+                            });
+                            recommendations.Add(new Recommendation()
+                            {
+                                Content = "Mr. Perfect",
+                                Type = RecommendationTypes.Book
+                            });
+                            recommendations.Add(new Recommendation()
+                            {
+                                Content = "50 shades of grey",
+                                Type = RecommendationTypes.Book
+                            });
+
+                            recommendations.Add(new Recommendation()
                             {
                                 Content = "American pie",
                                 Type = RecommendationTypes.Movie
-                            };
-
-                            var pesen = new Recommendation()
+                            });
+                            recommendations.Add(new Recommendation()
                             {
-                                Content = "bqla roza",
+                                Content = "Despicable Me",
+                                Type = RecommendationTypes.Movie
+                            });
+
+                            recommendations.Add(new Recommendation()
+                            {
+                                Content = "Bach",
                                 Type = RecommendationTypes.Music
-                            };
-
-                            var neshto = new Recommendation()
+                            });
+                            recommendations.Add(new Recommendation()
                             {
-                                Content = "memes",
-                                Type = RecommendationTypes.Other
-                            };
+                                Content = "Vivaldi",
+                                Type = RecommendationTypes.Music
+                            });
+                            recommendations.Add(new Recommendation()
+                            {
+                                Content = "Vagner",
+                                Type = RecommendationTypes.Music
+                            });
+                            recommendations.Add(new Recommendation()
+                            {
+                                Content = "Mozzart",
+                                Type = RecommendationTypes.Music
+                            });
 
-                            db.Recommendations.Add(neshto);
-                            db.Recommendations.Add(pesen);
-                            db.Recommendations.Add(film);
-                            db.Recommendations.Add(kniga);
-                            db.Recommendations.Add(izlez);
+                            recommendations.Add(new Recommendation()
+                            {
+                                Content = "Memes",
+                                Type = RecommendationTypes.Other
+                            });
+                            
+                            db.Recommendations.AddRange(recommendations);
 
                             await db.SaveChangesAsync();
 
