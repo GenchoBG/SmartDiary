@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelliMood.Web", "IntelliMood.Web\IntelliMood.Web.csproj", "{997348B1-31C1-4753-B218-0741370BE795}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelliMood.Data", "IntelliMood.Data\IntelliMood.Data.csproj", "{976F8F9C-3B6F-4992-AC34-5F6B6FF602BC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelliMood.Services", "IntelliMood.Services\IntelliMood.Services.csproj", "{35A24CCF-3DE3-405F-841E-2BF06C6668F9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntelliMood.Tests", "IntelliMood.Tests\IntelliMood.Tests.csproj", "{F20EE520-1A86-40A1-BE5A-2B5F12546D8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{35A24CCF-3DE3-405F-841E-2BF06C6668F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35A24CCF-3DE3-405F-841E-2BF06C6668F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35A24CCF-3DE3-405F-841E-2BF06C6668F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F20EE520-1A86-40A1-BE5A-2B5F12546D8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F20EE520-1A86-40A1-BE5A-2B5F12546D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F20EE520-1A86-40A1-BE5A-2B5F12546D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F20EE520-1A86-40A1-BE5A-2B5F12546D8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -55,14 +55,14 @@ namespace IntelliMood.Web.Controllers
             var message = this.chatService.AddMessage(data.Message, currentUserId, false);
 
             var mood = this.emotionGetter.GetEmotionFromText(data.Message);
-            var moodMessage = $"I think you are feeling {mood}";
+            var moodMessage = $"I think you are feeling {GetMoodAdjective(mood)}";
             if (this.IsMoodNegative(mood))
             {
                 var recommendation = this.recommender.Recommend(currentUserId);
                 
 
                 moodMessage += Environment.NewLine;
-                moodMessage += $"I think {recommendation.Content} will make you feel better!";
+                moodMessage += $"I think '{recommendation.Content}' will make you feel better!";
                 moodMessage += Environment.NewLine;
 
                 var response = this.chatService.AddMessage(moodMessage, currentUserId, true);
@@ -132,6 +132,22 @@ namespace IntelliMood.Web.Controllers
         private bool IsMoodNegative(string message)
         {
             return message == "Sadness" || message == "Disgust" || message == "Anger" || message == "Fear";
+        }
+
+        private string GetMoodAdjective(string mood)
+        {
+            var dict = new Dictionary<string, string>()
+            {
+                {"Sadness", "Sad" },
+                {"Disgust", "Disgusted" },
+                {"Anger", "Angry" },
+                {"Fear", "Frightened" },
+                {"Calm", "Calm" },
+                {"Surprise", "Surprised" },
+                {"Happiness", "Happy" },
+            };
+
+            return dict[mood];
         }
     }
 }
