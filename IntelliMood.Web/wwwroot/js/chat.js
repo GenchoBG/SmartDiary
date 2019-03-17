@@ -188,9 +188,9 @@ $(document).ready(function () {
 });
 
 function thankingPopUp() {
-    $("#thanks-alert").css("z-index", "100");
+    $("#thanks-alert").css("z-index", "10000");
     $("#thanks-alert").css("display", "block");
-    $("#thanks-alert").fadeOut(4500);
+    $("#thanks-alert").fadeOut(2500);
 }
 
 function changeStars(index, type) {
