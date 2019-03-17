@@ -115,7 +115,7 @@ namespace IntelliMood.Web.Controllers
 
             this.recommendationService.AddRating(currentUserId, recommendationId, rating);
 
-            return this.Ok();
+            return this.Json("");
         }
 
         [HttpPost]
@@ -125,7 +125,7 @@ namespace IntelliMood.Web.Controllers
 
             this.recommendationService.AddRecommendationWithRating(currentUserId, recommendation, rating);
 
-            return this.Ok();
+            return this.Json("");
         }
 
 

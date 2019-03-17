@@ -8,6 +8,10 @@
     }
 }
 
+function clearRecommendationFeedback() {
+    $('#messages').children().last().remove();
+}
+
 function appendRecommendation(time, element) {
     let div = $(`<div class="message d-block"></div>`);
 
@@ -17,6 +21,7 @@ function appendRecommendation(time, element) {
 
     $("#messages").append(div);
 }
+
 
 function clearMessages() {
     $("#messages").html("");
@@ -57,15 +62,13 @@ function addRating(recommendationId, rating) {
             rating: rating
         },
         success: function (data) {
-            console.log(data);
-            clearMessages();
-            for (let message of data) {
-                appendMessage(message);
-            }
+            clearRecommendationFeedback();
+            thankingPopUp();
             scrollToBottom();
         },
-        error: function () {
+        error: function (err) {
             console.log("Error");
+            console.log(err);
         }
     });
 }
@@ -82,15 +85,13 @@ function addRecommendationWithRating(button, rating) {
             rating: rating
         },
         success: function (data) {
-            console.log(data);
-            clearMessages();
-            for (let message of data) {
-                appendMessage(message);
-            }
+            clearRecommendationFeedback();
+            thankingPopUp();
             scrollToBottom();
         },
-        error: function () {
+        error: function (err) {
             console.log("Error");
+            console.log(err);
         }
     });
 }
@@ -188,6 +189,7 @@ $(document).ready(function () {
 
 function thankingPopUp() {
     $("#thanks-alert").css("z-index", "100");
+    $("#thanks-alert").css("display", "block");
     $("#thanks-alert").fadeOut(4500);
 }
 
