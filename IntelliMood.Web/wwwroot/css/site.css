@@ -10,6 +10,13 @@ p,a, h2, h1 {
 	font-family: 'Sniglet', cursive;
 }
 
+footer {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    z-index: 300;
+}
+
 /* Calendar */
 
 .calendar {
@@ -49,13 +56,6 @@ p,a, h2, h1 {
 }
 
 /* end */
-
-footer {
-    width: 100%;
-    bottom: 0;
-    position: fixed;
-    z-index: 300;
-}
 
 body, html {
     overflow-x: hidden;
