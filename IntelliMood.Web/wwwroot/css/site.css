@@ -1,4 +1,16 @@
-﻿/* Calendar */
+﻿/*Footer*/
+footer i {
+	font-size: 60px;
+}
+footer {
+	margin-left: 60px;
+}
+
+p,a, h2, h1 {
+	font-family: 'Sniglet', cursive;
+}
+
+/* Calendar */
 
 .calendar {
     text-align: center;
@@ -100,6 +112,9 @@ body, html {
     text-align: left;
 }
 
+#thanks-alert {
+	display: none;
+}
 .message {
     padding: auto 0;
     display: block;

@@ -12,7 +12,7 @@
 		}
 		else {
 			var notification = new Notification(title, {
-				icon: 'http://Your_Website.com/logo.png',
+				icon: 'http://localhost:49735/wwwroot/images/robot.png',
 				body: desc,
 			});
 
