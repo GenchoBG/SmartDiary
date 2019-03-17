@@ -403,6 +403,18 @@ html {
     footer {
         display: none !important;
     }
+
+    .recommendations-header {
+        font-size: 8pt;
+    }
+
+    .user-header {
+        font-size: 8pt;
+    }
+
+    .information-table {
+        font-size: 8pt;
+    }
 }
 
 @media screen and (max-width: 460px) {

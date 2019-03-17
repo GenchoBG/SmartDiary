@@ -30,13 +30,13 @@
     @foreach (var user in Model.Users)
     {
         <tr>
-            <th>@user.UserName</th>
+            <th class="user-header">@user.UserName</th>
             @{
                 int recommendationIndex = 0;
             }
             @foreach (var recommendation in Model.Recommendations)
             {
-                <td id="tableContent-@userIndex-@recommendationIndex">---</td>
+                <td class="information-table" id="tableContent-@userIndex-@recommendationIndex">---</td>
                 {
                     recommendationIndex++;
                 }
@@ -65,13 +65,13 @@
     @foreach (var user in Model.Users)
     {
         <tr>
-            <th>@user.UserName</th>
+            <th class="user-header">@user.UserName</th>
             @{
                 int recommendationIndex = 0;
             }
             @foreach (var recommendation in Model.Recommendations)
             {
-                <td id="tablePredictionContent-@userIndex-@recommendationIndex">---</td>
+                <td class="information-table" id="tablePredictionContent-@userIndex-@recommendationIndex">---</td>
                 {
                     recommendationIndex++;
                 }
