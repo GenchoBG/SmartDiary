@@ -56,7 +56,7 @@ namespace IntelliMood.Web.Controllers
 
             var mood = this.emotionGetter.GetEmotionFromText(data.Message);
             var moodMessage = $"I think you are feeling {mood}";
-            if (mood == "Sadness")
+            if (this.IsMoodNegative(mood))
             {
                 var recommendation = this.recommender.Recommend(currentUserId);
                 
@@ -71,7 +71,7 @@ namespace IntelliMood.Web.Controllers
                 {
                     myMessage = this.mapper.Map<MessageListViewModel>(message),
                     response = this.mapper.Map<MessageListViewModel>(response),
-                    hasRecommendation = mood == "Sadness",
+                    hasRecommendation = true,
                     recommendationId = recommendation.Id
                 });
 
@@ -86,7 +86,7 @@ namespace IntelliMood.Web.Controllers
             {
                 myMessage = this.mapper.Map<MessageListViewModel>(message),
                 response = this.mapper.Map<MessageListViewModel>(responseMessage),
-                hasRecommendation = mood == "Sadness"
+                hasRecommendation = false
             }); 
         }
 
@@ -126,6 +126,12 @@ namespace IntelliMood.Web.Controllers
             this.recommendationService.AddRecommendationWithRating(currentUserId, recommendation, rating);
 
             return this.Ok();
+        }
+
+
+        private bool IsMoodNegative(string message)
+        {
+            return message == "Sadness" || message == "Disgust" || message == "Anger" || message == "Fear";
         }
     }
 }

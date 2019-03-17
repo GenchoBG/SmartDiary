@@ -9,7 +9,7 @@ using Microsoft.ML.Transforms.Text;
 
 namespace IntelliMood.Services.Implementations
 {
-    public class MyEmotionGetter : IEmotionGetter
+    public class OurEmotionGetter : IEmotionGetter
     {
         public class SentimentData
         {
@@ -36,7 +36,7 @@ namespace IntelliMood.Services.Implementations
         private static MLContext mlContext;
         private static PredictionEngine<SentimentData, SentimentPrediction> predictionFunction;
 
-        public MyEmotionGetter()
+        public OurEmotionGetter()
         {
             mlContext = new MLContext();
 
