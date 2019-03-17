@@ -30,19 +30,19 @@ namespace IntelliMood.Web.Infrastructure.Extensions
                     {
                         if (!db.Recommendations.Any())
                         {
-                            var outside = new Recommendation()
+                            var recommendations = new List<Recommendation>();
+
+                            recommendations.Add(new Recommendation()
                             {
                                 Content = "Take a walk outside",
                                 Type = RecommendationTypes.Activity
-                            };
+                            });
 
-                            var shower = new Recommendation()
+                            recommendations.Add(new Recommendation()
                             {
                                 Content = "Take a cold shower",
                                 Type = RecommendationTypes.Activity
-                            };
-
-                            var recommendations = new List<Recommendation>();
+                            });
 
                             recommendations.Add(new Recommendation()
                             {
@@ -144,6 +144,26 @@ namespace IntelliMood.Web.Infrastructure.Extensions
                             await userManager.CreateAsync(kosta, "test12");
 
                             var random = new Random();
+
+                            var lovedByEverybody = new Recommendation()
+                            {
+                                Content = "Playing with animals",
+                                Type = RecommendationTypes.Other
+                            };
+
+                            db.Recommendations.Add(lovedByEverybody);
+                            db.SaveChanges();
+
+                            foreach (var user in db.Users.ToList())
+                            {
+                                db.UserRecommendations.Add(new UserRecommendation()
+                                {
+                                    Mood = "Sad",
+                                    Rating = 5,
+                                    UserId = user.Id,
+                                    RecommendationId = lovedByEverybody.Id
+                                });
+                            }
 
                             foreach (var recommendation in db.Recommendations.ToList())
                             {

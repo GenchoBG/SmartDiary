@@ -3,14 +3,25 @@
     ViewData["Title"] = "Stats";
 }
 
-<h2>Stats</h2>
+<div class="row small">
+    <div class="col align-self-center">
+        <button class="w3-button w3-xlarge w3-hide-large" onclick="w3_open()">☰</button>
+    </div>
+    <div class="col">
+        <h2 class="display-4">Stats</h2>
+    </div>
+</div>
+<div class="big">
+    <h2 class="display-4">Stats</h2>
+</div>
+
 <br>
 <table class="table table-responsive table-responsive-lg">
     <tr>
         <th></th>
         @foreach (var rec in Model.Recommendations)
         {
-            <th>@rec.Content</th>
+            <th class="recommendations-header">@rec.Content</th>
         }
     </tr>
     @{
@@ -45,7 +56,7 @@
         <th></th>
         @foreach (var rec in Model.Recommendations)
         {
-            <th>@rec.Content</th>
+            <th class="recommendations-header">@rec.Content</th>
         }
     </tr>
     @{
