@@ -7,19 +7,19 @@
 
 <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
     <li class="@ManageNavPages.IndexNavClass(ViewContext)">
-        <a asp-action="Index" class="btn btn-outline-primary w-100 d-block">Profile</a>
+        <a asp-action="Index" asp-controller="Manage" class="w3-bar-item w3-button">Profile information</a>
     </li>
     <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)">
-        <a asp-action="ChangePassword" class="btn btn-outline-primary w-100 d-block">Password</a>
+        <a asp-action="ChangePassword" asp-controller="Manage" class="w3-bar-item w3-button">Password</a>
     </li>
     @if (hasExternalLogins)
     {
         <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)">
-            <a asp-action="ExternalLogins" class="btn btn-outline-primary w-100 d-block">External logins</a>
+            <a asp-action="ExternalLogins" asp-controller="Manage" class="w3-bar-item w3-button">External logins</a>
         </li>
     }
     <li class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)">
-        <a asp-action="TwoFactorAuthentication" class="btn btn-outline-primary w-100 d-block">Two-factor authentication</a>
+        <a asp-action="TwoFactorAuthentication" asp-controller="Manage" class="w3-bar-item w3-button">Two-factor authentication</a>
     </li>
 </ul>
 

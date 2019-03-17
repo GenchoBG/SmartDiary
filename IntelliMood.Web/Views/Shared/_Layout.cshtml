@@ -6,35 +6,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - IntelliMood</title>
+	<link href="https://fonts.googleapis.com/css?family=Sniglet" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - IntelliMood</title>
 
 
-    <environment include="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
-    <style>
-        .primaryColor {
-            background-color: @primary;
-        }
+	<environment include="Development">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="~/css/site.css" />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	</environment>
+	<environment exclude="Development">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+		<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	</environment>
+	<style>
+		.primaryColor {
+			background-color: @primary;
+		}
 
-        .secondaryColor{
-            color: @secondary;
-        }
+		.secondaryColor {
+			color: @secondary;
+		}
 
-        #enterBtn {
-            border-color: @secondary;
-            color: @secondary;
-        }
-    </style>
+		#enterBtn {
+			border-color: @secondary;
+			color: @secondary;
+		}
+	</style>
 </head>
 <body>
     @if (!User.Identity.IsAuthenticated)
@@ -46,8 +50,11 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">S
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contacts</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -58,36 +65,23 @@
     {
         <div class="row" id="contentPage">
             <!-- Sidebar -->
-            <div class="col-2">
-                <div class="sidebar primaryColor">
-                    <div>
-                        <p id="menuHeader" class="secondaryColor">Menu</p>
+
+            <div class="col-md-2">
+                <div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left primaryColor" style="width: 200px;" id="mySidebar">
+                    <button class="w3-bar-item w3-button w3-large w3-hide-large secondaryColor" onclick="w3_close()">
+                        <p id="menuHeader" class="secondaryColor w3-bar-item w3-button">Menu &times;</p>
+                    </button>
+
+                    <a asp-controller="Chat" asp-action="Index" class="w3-bar-item w3-button secondaryColor">Chat</a>
+                    <button class="w3-button w3-block w3-left-align secondaryColor" onclick="myAccFunc()">
+                        Profile <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div id="demoAcc" class="w3-hide w3-white w3-card">
+                        @await Html.PartialAsync("_ManageNav")
                     </div>
-                    <div class="linkSidebar">
-                        <div class="text">
-                            <a asp-controller="Chat" asp-action="Index">Chat</a>
-                        </div>
-                    </div>
-                    <div class="linkSidebar">
-                        <div class="text">
-                            <a asp-controller="Manage" asp-action="Index" title="Manage">Profile</a>
-                        </div>
-                    </div>
-                    <div class="linkSidebar">
-                        <div class="text">
-                            <a asp-controller="Calendar" asp-action="Index">Calendar</a>
-                        </div>
-                    </div>
-                    <div class="linkSidebar">
-                        <div class="text">
-                            <a asp-controller="Stats" asp-action="Index">Stats</a>
-                        </div>
-                    </div>
-                    <div class="linkSidebar">
-                        <div class="text">
-                            <a asp-controller="Recommendation" asp-action="Stats">Recommendations</a>
-                        </div>
-                    </div>
+                    <a asp-controller="Calendar" asp-action="Index" class="w3-bar-item w3-button secondaryColor">Calendar</a>
+                    <a asp-controller="Stats" asp-action="Index" class="w3-bar-item w3-button secondaryColor">Stats</a>
+                    <a asp-controller="Recommendation" asp-action="Stats" class="w3-bar-item w3-button secondaryColor">Recommendations</a>
                     <div id="logoutbtn"></div>
                     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="form-inline my-2 my-lg-0">
                         <ul class="navbar-nav mx-auto">
@@ -96,22 +90,21 @@
                             </li>
                         </ul>
                     </form>
-
                 </div>
             </div>
-
-            <!-- Page Content -->
-            <div class="col-10">
-                <div class="container-fluid" id="">
-                    @RenderBody()
+            <div class="col-md-10">
+                <div class="w3-main">
+                    <div class="container-fluid">
+                        <!-- Page Content -->
+                        @RenderBody()
+                    </div>
                 </div>
             </div>
         </div>
-
     }
     else
     {
-        <div class="container body-content" style="height: 100vh">
+        <div class="container body-content homePage">
             @RenderBody()
         </div>
     }
@@ -120,10 +113,8 @@
     @if (!User.Identity.IsAuthenticated)
     {
         <hr />
-        <footer style="bottom: 0">
-            @await Html.PartialAsync("../Home/Contact")
-            <p>&copy; 2019 - IntelliMood.Web</p>
-        </footer>
+ 		<footer>
+            <p>&copy; 2019 - IntelliMood.Web</p>        </footer>
     }
 
 
@@ -147,7 +138,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
+	<script src="js/push-notificator.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

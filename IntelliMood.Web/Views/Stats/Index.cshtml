@@ -3,11 +3,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h2 class="display-4 header"> Stats </h2>
+<div class="fullPage">
+    <div class="row small">
+        <div class="col align-self-center">
+            <button class="w3-button w3-xlarge w3-hide-large" onclick="w3_open()">☰</button>
+        </div>
+        <div class="col">
+            <h2 class="display-4 header"> Stats </h2>
+        </div>
+    </div>
+    <div class="big"><h2 class="display-4 header"> Stats </h2></div>
 
-<div style="display: flex;">
-	<div style="display: block" id="monthly-piechart"></div>
-	<div style="display: block" id="yearly-piechart"></div>
+    <div id="pieChart">
+        <div id="monthly-piechart"></div>
+        <div id="yearly-piechart"></div>
+    </div>
 </div>
 
 
