@@ -36,6 +36,15 @@
     border-radius: 100%;
 }
 
+/* end */
+
+footer {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    z-index: 300;
+}
+
 body, html {
     overflow-x: hidden;
     min-height: 100%;
@@ -60,6 +69,8 @@ body, html {
     margin-top: 3%;
 }
 
+/* sidebar */
+
 #mySidebar {
     z-index: 100;
 }
@@ -76,8 +87,17 @@ body, html {
     margin-bottom: 10%;
 }
 
-.person p{
+/* end */
+
+/* chat */
+
+.person {
     float: right !important;
+    text-align: right;
+}
+
+.person p {
+    text-align: left;
 }
 
 .message {
@@ -86,6 +106,7 @@ body, html {
     float: left;
     clear: both;
     width: 100%;
+    margin-bottom: 1%;
 }
 
 .messageContent {
@@ -96,6 +117,17 @@ body, html {
     border-radius: 45px;
     margin-bottom: 0;
     display: inline-block;
+}
+
+.recommendationAnswer {
+    border: none;
+    border-bottom: 2px solid red;
+    outline: none;
+    margin-bottom: 2%;
+}
+
+.botQuestion {
+    margin-top: 2%;
 }
 
 .messageSmallContent {
@@ -109,6 +141,8 @@ body, html {
 
 .imgBot {
     display: inline-block;
+    max-width: 60px;
+    min-width: 50px;
 }
 
 .timestamp {
@@ -134,7 +168,7 @@ body, html {
 #messages {
     overflow-y: auto;
     direction: ltr;
-    max-height: 80vh;
+    height: 80vh;
 }
 
 .modalChatPreview {
@@ -142,6 +176,8 @@ body, html {
     direction: ltr;
     max-height: 50vh;
 }
+
+/* end */
 
 /* Home page */
 @keyframes right-slide {
@@ -217,6 +253,20 @@ body, html {
     display: inline-block;
 }
 
+.rating-btn {
+    width: 5%;
+    height: 5%;
+    display: inline-block;
+    border-radius: 60px;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.star-img {
+    width: 70%;
+    height: 70%;
+}
+
 /* mobile-friendly */
 html {
     font-size: 1rem;
@@ -267,7 +317,7 @@ html {
     }
 
     .imgBot {
-        width: 15%;
+        width: 10%;
     }
 
     .messageContent {
@@ -277,6 +327,8 @@ html {
 
     #pieChart {
         display: block;
+        overflow-y: auto;
+        height: 100%;
     }
 
     .small {
@@ -297,5 +349,64 @@ html {
 
     .control-profile {
         margin: auto;
+    }
+
+    .rating-btn {
+        width: 10%;
+        height: 10%;
+        display: inline-block;
+        border-radius: 60px;
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+    .star-img {
+        width: 70%;
+        height: 70%;
+    }
+
+    #topic {
+        font-size: 50pt;
+        overflow-wrap: normal;
+    }
+
+    .parent {
+        height: 100%;
+        display: block;
+    }
+
+    .text-side {
+        display: block;
+        overflow-wrap: normal;
+    }
+
+    #homePage, .homePage {
+        display: block;
+        overflow-y: auto;
+        height: 100%;
+    }
+
+    footer {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .rating-btn {
+        width: 15%;
+        height: 15%;
+        display: inline-block;
+        border-radius: 60px;
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+    .star-img {
+        width: 70%;
+        height: 70%;
+    }
+
+    .imgBot {
+        width: 13%;
     }
 }

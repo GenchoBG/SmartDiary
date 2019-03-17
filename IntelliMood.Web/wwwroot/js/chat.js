@@ -1,12 +1,12 @@
 ﻿function appendMessage(message) {
-if (message.isResponse) {
-		$("#messages").append(
-            $(`<div class="message d-block"><img src="../images/robot.png" class="imgBot"> <p class="messageContent primaryColor secondaryColor"> ${message.content.trim()
-				}</p><div class="timestamp">${message.time}</div></div>`));
-	} else
-	{
-        $("#messages").append($(`<div class="message person d-block"><p class="messageContent primaryColor secondaryColor">${message.content.trim()}</p><div class="timestamp">${message.time.trim()}</div></div>`));
-	}}
+    if (message.isResponse) {
+        $("#messages").append(
+            $(`<div class="message d-block"><img src="../images/robot.png" class="imgBot"> <p class="messageContent messageSmallContent primaryColor secondaryColor"> ${message.content
+                }</p><div class="timestamp">${message.time}</div></div>`));
+    } else {
+        $("#messages").append($(`<div class="message person d-block"><p class="messageContent messageSmallContent primaryColor secondaryColor">${message.content}</p><div class="timestamp">${message.time.trim()}</div></div>`));
+    }
+}
 
 function appendRecommendation(time, element) {
     let div = $(`<div class="message d-block"></div>`);
@@ -46,9 +46,8 @@ function DisplayCurrentTime(date) {
     return `${hours}:${minutes} ${ampm}`;
 };
 
-
 function addRating(recommendationId, rating) {
-	thankingPopUp();
+    thankingPopUp();
     $.ajax({
         url: '/Chat/AddRating',
         type: 'post',
@@ -72,7 +71,7 @@ function addRating(recommendationId, rating) {
 }
 
 function addRecommendationWithRating(button, rating) {
-	thankingPopUp();
+    thankingPopUp();
     let recommendation = $($(button).parent().find('input')[0]).val();
     $.ajax({
         url: '/Chat/AddRecommendationWithRating',
@@ -100,7 +99,7 @@ $("#enterBtn").on("click",
     function (event) {
         if ($("#chatBox").val()) {
             let val = $("#chatBox").val();
-			clearChatBox(val);
+            clearChatBox(val);
 
             appendMessage({
                 content: val,
@@ -125,19 +124,20 @@ $("#enterBtn").on("click",
                     appendMessage(response);
                     if (data.hasRecommendation) {
                         var element = $(`<div>`)
-                            .append($(`<div>Rate my recommendation!</div>`))
-							.append($(`<button class="rating-btn" onmouseover="changeStars(1, 1);" onmouseout="reverseStars(1, 1);" onclick="addRating(${data.recommendationId}, 1)"><img class="star-img star1" src="images/star_empty.png"></button>`))
-							.append($(`<button class="rating-btn" onmouseover="changeStars(2, 1);" onmouseout="reverseStars(2, 1);" onclick="addRating(${data.recommendationId}, 2)"><img class="star-img star2" src="images/star_empty.png"></button>`))
-							.append($(`<button class="rating-btn" onmouseover="changeStars(3, 1);" onmouseout="reverseStars(3, 1);" onclick="addRating(${data.recommendationId}, 3)"><img class="star-img star3" src="images/star_empty.png"></button>`))
-							.append($(`<button class="rating-btn" onmouseover="changeStars(4, 1);" onmouseout="reverseStars(4, 1);" onclick="addRating(${data.recommendationId}, 4)"><img class="star-img star4" src="images/star_empty.png"></button>`))
-							.append($(`<button class="rating-btn" onmouseover="changeStars(5, 1);" onmouseout="reverseStars(5, 1);" onclick="addRating(${data.recommendationId}, 5)"><img class="star-img star5" src="images/star_empty.png"></button>`))
-                            .append($(`<div>You did something else? Rate how good it made you feel!</div>`))
-                            .append($(`<input type='text'></input>`))
-							.append($(`<button class="rating-btn" onmouseover="changeStars(1, 2);" onmouseout="reverseStars(1, 2);" onclick="addRecommendationWithRating(this, 1)"><img class="star-img star6" src="images/star_empty.png"></button>`))
-							.append($(`<button class="rating-btn" onmouseover="changeStars(2, 2);" onmouseout="reverseStars(2, 2);" onclick="addRecommendationWithRating(this, 2)"><img class="star-img star7" src="images/star_empty.png"></button>`))
-							.append($(`<button class="rating-btn" onmouseover="changeStars(3, 2);" onmouseout="reverseStars(3, 2);" onclick="addRecommendationWithRating(this, 3)"><img class="star-img star8" src="images/star_empty.png"></button>`))
-							.append($(`<button class="rating-btn" onmouseover="changeStars(4, 2);" onmouseout="reverseStars(4, 2);" onclick="addRecommendationWithRating(this, 4)"><img class="star-img star9" src="images/star_empty.png"></button>`))
-							.append($(`<button class="rating-btn" onmouseover="changeStars(5, 2);" onmouseout="reverseStars(5, 2);" onclick="addRecommendationWithRating(this, 5)"><img class="star-img star10" src="images/star_empty.png"></button>`));
+                            .append($(`<div><strong>Rate my recommendation!</strong></div>`))
+                            .append($(`<button class="rating-btn" onmouseover="changeStars(1, 1);" onmouseout="reverseStars(1, 1);" onclick="addRating(${data.recommendationId}, 1)"><img class="star-img star1" src="images/star_empty.png"></button>`))
+                            .append($(`<button class="rating-btn" onmouseover="changeStars(2, 1);" onmouseout="reverseStars(2, 1);" onclick="addRating(${data.recommendationId}, 2)"><img class="star-img star2" src="images/star_empty.png"></button>`))
+                            .append($(`<button class="rating-btn" onmouseover="changeStars(3, 1);" onmouseout="reverseStars(3, 1);" onclick="addRating(${data.recommendationId}, 3)"><img class="star-img star3" src="images/star_empty.png"></button>`))
+                            .append($(`<button class="rating-btn" onmouseover="changeStars(4, 1);" onmouseout="reverseStars(4, 1);" onclick="addRating(${data.recommendationId}, 4)"><img class="star-img star4" src="images/star_empty.png"></button>`))
+                            .append($(`<button class="rating-btn" onmouseover="changeStars(5, 1);" onmouseout="reverseStars(5, 1);" onclick="addRating(${data.recommendationId}, 5)"><img class="star-img star5" src="images/star_empty.png"></button>`))
+                            .append($(`<div class="botQuestion">You did something else?</div>`))
+                            .append($(`<input class="recommendationAnswer" placeholder="What did you do?" type='text'></input>`))
+                            .append($(`<div>Rate how good it made you feel!</div>`))
+                            .append($(`<button class="rating-btn" onmouseover="changeStars(1, 2);" onmouseout="reverseStars(1, 2);" onclick="addRecommendationWithRating(this, 1)"><img class="star-img star6" src="images/star_empty.png"></button>`))
+                            .append($(`<button class="rating-btn" onmouseover="changeStars(2, 2);" onmouseout="reverseStars(2, 2);" onclick="addRecommendationWithRating(this, 2)"><img class="star-img star7" src="images/star_empty.png"></button>`))
+                            .append($(`<button class="rating-btn" onmouseover="changeStars(3, 2);" onmouseout="reverseStars(3, 2);" onclick="addRecommendationWithRating(this, 3)"><img class="star-img star8" src="images/star_empty.png"></button>`))
+                            .append($(`<button class="rating-btn" onmouseover="changeStars(4, 2);" onmouseout="reverseStars(4, 2);" onclick="addRecommendationWithRating(this, 4)"><img class="star-img star9" src="images/star_empty.png"></button>`))
+                            .append($(`<button class="rating-btn" onmouseover="changeStars(5, 2);" onmouseout="reverseStars(5, 2);" onclick="addRecommendationWithRating(this, 5)"><img class="star-img star10" src="images/star_empty.png"></button>`));
 
                         appendRecommendation(response.time, element);
                     }
@@ -183,33 +183,34 @@ $(document).ready(function () {
             console.log("Error");
         }
     });
+    $("#thanks-alert").hide();
 });
 
 function thankingPopUp() {
-	$("#thanks-alert").css("display", "inline-block");
-	$("#thanks-alert").fadeOut(4500);
+    $("#thanks-alert").css("z-index", "100");
+    $("#thanks-alert").fadeOut(4500);
 }
 
 function changeStars(index, type) {
-	if (type === 1) {
-		for (let i = 1; i <= index; i++) {
-			$(`.star${i}`).attr("src", "images/star_full.png");
-		}
-	} else {
-		for (let i = 1; i <= index; i++) {
-			$(`.star${i + 5}`).attr("src", "images/star_full.png");
-		}
-	}
+    if (type === 1) {
+        for (let i = 1; i <= index; i++) {
+            $(`.star${i}`).attr("src", "images/star_full.png");
+        }
+    } else {
+        for (let i = 1; i <= index; i++) {
+            $(`.star${i + 5}`).attr("src", "images/star_full.png");
+        }
+    }
 }
 
 function reverseStars(index, type) {
-	if (type === 1) {
-		for (let i = 1; i <= index; i++) {
-			$(`.star${i}`).attr("src", "images/star_empty.png");
-		}
-	} else {
-		for (let i = 1; i <= index; i++) {
-			$(`.star${i + 5}`).attr("src", "images/star_empty.png");
-		}
-	}
+    if (type === 1) {
+        for (let i = 1; i <= index; i++) {
+            $(`.star${i}`).attr("src", "images/star_empty.png");
+        }
+    } else {
+        for (let i = 1; i <= index; i++) {
+            $(`.star${i + 5}`).attr("src", "images/star_empty.png");
+        }
+    }
 }

@@ -52,6 +52,9 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
                 </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contacts</a></li>
+                </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </nav>
@@ -100,7 +103,7 @@
     }
     else
     {
-        <div class="container body-content">
+        <div class="container body-content homePage">
             @RenderBody()
         </div>
     }
@@ -109,14 +112,7 @@
     @if (!User.Identity.IsAuthenticated)
     {
         <hr />
-        <footer style="bottom: 0; position: fixed; display: block;">
-            <div>
-                <address class="link"><a href="https://github.com/GenchoBG/SmartDiary/">Link</a> to GitHub repository.</address>
-                <address>
-                    <strong>Support:</strong> <a href="mailto:genchobg11@gmail.com">genchobg11@gmail.com</a>
-                </address>
-
-            </div>
+        <footer>
             <p>&copy; 2019 - IntelliMood.Web</p>
         </footer>
     }
