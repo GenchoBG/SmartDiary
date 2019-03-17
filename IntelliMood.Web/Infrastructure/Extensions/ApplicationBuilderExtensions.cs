@@ -145,6 +145,24 @@ namespace IntelliMood.Web.Infrastructure.Extensions
 
                             var random = new Random();
 
+                            foreach (var recommendation in db.Recommendations.ToList())
+                            {
+                                foreach (var user in db.Users.ToList())
+                                {
+                                    var shouldAdd = random.Next(0, 10);
+                                    if (shouldAdd < 7)
+                                    {
+                                        db.UserRecommendations.Add(new UserRecommendation()
+                                        {
+                                            UserId = user.Id,
+                                            RecommendationId = recommendation.Id,
+                                            Mood = "Bad",
+                                            Rating = random.Next(5) + 1
+                                        });
+                                    }
+                                }
+                            }
+
                             var lovedByEverybody = new Recommendation()
                             {
                                 Content = "Playing with animals",
@@ -163,24 +181,6 @@ namespace IntelliMood.Web.Infrastructure.Extensions
                                     UserId = user.Id,
                                     RecommendationId = lovedByEverybody.Id
                                 });
-                            }
-
-                            foreach (var recommendation in db.Recommendations.ToList())
-                            {
-                                foreach (var user in db.Users.ToList())
-                                {
-                                    var shouldAdd = random.Next(0, 10);
-                                    if (shouldAdd < 7)
-                                    {
-                                        db.UserRecommendations.Add(new UserRecommendation()
-                                        {
-                                            UserId = user.Id,
-                                            RecommendationId = recommendation.Id,
-                                            Mood = "Bad",
-                                            Rating = random.Next(5) + 1
-                                        });
-                                    }
-                                }
                             }
 
                             await db.SaveChangesAsync();
