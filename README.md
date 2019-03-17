@@ -9,14 +9,3 @@ The app will ask how did your day went and depending on your answer will suggest
   Kalin Doychev <br />
   Kostadin Kostadinov <br />
   
-# Login And Register Page
-
-# Chat Page
-
-# Profile Page
-
-# Calendar Page
-
-# Stats Page
-
-# Recommendations Page
