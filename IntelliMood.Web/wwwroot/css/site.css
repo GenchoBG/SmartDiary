@@ -1,7 +1,5 @@
 ﻿/*Footer*/
-footer i {
-	font-size: 60px;
-}
+
 footer {
 	margin-left: 60px;
 }
@@ -183,6 +181,7 @@ body, html {
 #messages {
     overflow-y: auto;
     direction: ltr;
+    display: block;
     height: 80vh;
 }
 
