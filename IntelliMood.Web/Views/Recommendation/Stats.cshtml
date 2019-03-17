@@ -4,8 +4,8 @@
 }
 
 <h2>Stats</h2>
-
-<table>
+<br>
+<table class="table table-responsive table-responsive-lg">
     <tr>
         <th></th>
         @foreach (var rec in Model.Recommendations)
@@ -13,14 +13,66 @@
             <th>@rec.Content</th>
         }
     </tr>
+    @{
+        int userIndex = 0;
+    }
     @foreach (var user in Model.Users)
     {
         <tr>
             <th>@user.UserName</th>
+            @{
+                int recommendationIndex = 0;
+            }
             @foreach (var recommendation in Model.Recommendations)
             {
-                <td id="tableContent-@user.Id-@recommendation.Id">---</td>
+                <td id="tableContent-@userIndex-@recommendationIndex">---</td>
+                {
+                    recommendationIndex++;
+                }
             }
         </tr>
+        
+        {
+            userIndex++;
+        }
     }
 </table>
+<br>
+
+
+<table class="table table-responsive table-responsive-lg">
+    <tr>
+        <th></th>
+        @foreach (var rec in Model.Recommendations)
+        {
+            <th>@rec.Content</th>
+        }
+    </tr>
+    @{
+        userIndex = 0;
+    }
+    @foreach (var user in Model.Users)
+    {
+        <tr>
+            <th>@user.UserName</th>
+            @{
+                int recommendationIndex = 0;
+            }
+            @foreach (var recommendation in Model.Recommendations)
+            {
+                <td id="tablePredictionContent-@userIndex-@recommendationIndex">---</td>
+                {
+                    recommendationIndex++;
+                }
+            }
+        </tr>
+
+        {
+            userIndex++;
+        }
+    }
+</table>
+
+@section Scripts{ 
+    <script src="~/js/table.js"></script>
+}

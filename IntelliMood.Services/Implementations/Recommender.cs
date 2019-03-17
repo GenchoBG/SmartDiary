@@ -18,7 +18,7 @@ namespace IntelliMood.Services.Implementations
             this.db = db;
         }
 
-        public Recommendation Recommend(string userId)
+        public List<List<double>> GetUnpopulatedArray()
         {
             var users = this.db.Users.ToList();
             var recommendations = this.db.Recommendations.ToList();
@@ -52,8 +52,40 @@ namespace IntelliMood.Services.Implementations
             {
                 values[userIndexes[userRecommendation.UserId]][recommendationIndexes[userRecommendation.RecommendationId]] = userRecommendation.Rating;
             }
+            
+            return values.Select(arr => arr.ToList()).ToList();
+        }
 
-            var populated = this.GetPopulatedEmptySpots(values.Select(arr => arr.ToList()).ToList());
+        public List<List<double>> GetPopulatedArray()
+        {
+            var populated = this.GetPopulatedEmptySpots(this.GetUnpopulatedArray());
+
+            return populated;
+        } 
+
+        public Recommendation Recommend(string userId)
+        {
+            var users = this.db.Users.ToList();
+            var recommendations = this.db.Recommendations.ToList();
+
+            var userIndexes = new Dictionary<string, int>();
+            var recommendationIndexes = new Dictionary<int, int>();
+
+            for (int i = 0; i < users.Count; i++)
+            {
+                var user = users[i];
+
+                userIndexes[user.Id] = i;
+            }
+
+            for (int i = 0; i < recommendations.Count; i++)
+            {
+                var recommendation = recommendations[i];
+
+                recommendationIndexes[recommendation.Id] = i;
+            }
+            
+            var populated = this.GetPopulatedArray();
 
             var goodIndexes = populated[userIndexes[userId]].Select((val, index) =>
             {
@@ -68,8 +100,6 @@ namespace IntelliMood.Services.Implementations
             var winner = goodIndexes[random.Next(0, goodIndexes.Count)];
 
             return recommendations[winner];
-
-            //return this.db.Recommendations.First();
         }
 
         private List<List<double>> GetPopulatedEmptySpots(List<List<double>> data)

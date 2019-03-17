@@ -15,12 +15,14 @@ namespace IntelliMood.Web.Controllers
     public class RecommendationController : Controller
     {
         private readonly IRecommendationService recommendationService;
+        private readonly IRecommender recommender;
         private readonly UserManager<User> userManager;
 
-        public RecommendationController(IRecommendationService recommendationService, UserManager<User> userManager)
+        public RecommendationController(IRecommendationService recommendationService, UserManager<User> userManager, IRecommender recommender)
         {
             this.recommendationService = recommendationService;
             this.userManager = userManager;
+            this.recommender = recommender;
         }
 
         public IActionResult Stats()
@@ -35,6 +37,16 @@ namespace IntelliMood.Web.Controllers
             };
 
             return this.View(model);
+        }
+
+        public IActionResult GetUnpopulatedArray()
+        {
+            return this.Json(this.recommender.GetUnpopulatedArray());
+        }
+
+        public IActionResult GetPopulatedArray()
+        {
+            return this.Json(this.recommender.GetPopulatedArray());
         }
     }
 }
