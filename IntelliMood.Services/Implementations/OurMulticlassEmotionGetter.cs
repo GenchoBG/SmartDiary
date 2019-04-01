@@ -9,41 +9,35 @@ using Microsoft.ML.Transforms.Text;
 
 namespace IntelliMood.Services.Implementations
 {
-    public class OurEmotionGetter : IEmotionGetter
+    public class OurMulticlassEmotionGetter : IEmotionGetter
     {
         public class SentimentData
         {
-            public float Sentiment { get; set; }
+            public string Sentiment { get; set; }
 
-            public string SentimentText { get; set; }
+            public string Content { get; set; }
         }
 
         public class SentimentPrediction
         {
             [ColumnName("PredictedLabel")]
-            public bool Prediction { get; set; }
-
-            [ColumnName("Probability")]
-            public float Probability { get; set; }
-
-            [ColumnName("Score")]
-            public float Score { get; set; }
+            public string Sentiment;
         }
 
-        private static readonly string TrainDataPath = Path.Combine(Environment.CurrentDirectory, "../IntelliMood.Services/Datasets", "train_data.csv");
-        private static readonly string ModelPath = Path.Combine(Environment.CurrentDirectory, "", "Model.zip");
+        private static readonly string TrainDataPath = Path.Combine(Environment.CurrentDirectory, "../IntelliMood.Services/Datasets", "text_emotion.csv");
+        private static readonly string ModelPath = Path.Combine(Environment.CurrentDirectory, "", "SentimentModel.zip");
         private static TextLoader textLoader;
         private static MLContext mlContext;
         private static PredictionEngine<SentimentData, SentimentPrediction> predictionFunction;
 
-        public OurEmotionGetter()
+        public OurMulticlassEmotionGetter()
         {
             mlContext = new MLContext();
 
             textLoader = mlContext.Data.CreateTextLoader(separatorChar: '\t', hasHeader: true, columns: new[]
             {
-                new TextLoader.Column("Label", DataKind.Boolean, 0),
-                new TextLoader.Column("SentimentText", DataKind.String, 1)
+                new TextLoader.Column("Sentiment", DataKind.String, 1),
+                new TextLoader.Column("Content", DataKind.String, 3)
             });
 
             //var model = Train(mlContext, TrainDataPath);
@@ -65,7 +59,7 @@ namespace IntelliMood.Services.Implementations
                     return loadedModel;
                 }
             }
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException)
             {
                 return Train(mlContext, TrainDataPath);
             }
@@ -75,9 +69,11 @@ namespace IntelliMood.Services.Implementations
         {
             var trainData = textLoader.Load(dataPath);
 
-            var pipeline = mlContext.Transforms.Text.FeaturizeText(outputColumnName: "Features", inputColumnName: "SentimentText")
-                //.Append(mlContext.BinaryClassification.Trainers.FastTree(numLeaves: 50, numTrees: 50, minDatapointsInLeaves: 20));
-                .Append(mlContext.BinaryClassification.Trainers.FastTree(numLeaves: 50, numTrees: 50, minDatapointsInLeaves: 20));
+            var pipeline = mlContext.Transforms.Conversion.MapValueToKey(inputColumnName: "Sentiment", outputColumnName: "Label")
+                .Append(mlContext.Transforms.Text.FeaturizeText(inputColumnName: "Content", outputColumnName: "ContentFeaturized"))
+                .Append(mlContext.Transforms.Concatenate("Features", "ContentFeaturized"))
+                .Append(mlContext.MulticlassClassification.Trainers.StochasticDualCoordinateAscent(DefaultColumnNames.Label, DefaultColumnNames.Features))
+                .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
 
             Console.WriteLine("=============== Create and Train the Model ===============");
             var model = pipeline.Fit(trainData);
@@ -98,10 +94,15 @@ namespace IntelliMood.Services.Implementations
 
         public string GetEmotionFromText(string text)
         {
-            return predictionFunction.Predict(new SentimentData()
+            var prediction = predictionFunction.Predict(new SentimentData()
             {
-                SentimentText = text
-            }).Prediction ? "Happiness" : "Sadness";
+                Content = text
+            }).Sentiment;
+
+            var firstChar = prediction[0];
+            prediction = $"{char.ToUpper(firstChar)}{prediction.Substring(1)}";
+
+            return prediction;
         }
     }
 }
