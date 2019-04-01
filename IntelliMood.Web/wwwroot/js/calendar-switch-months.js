@@ -16,10 +16,14 @@ function daysInMonth(month, year) {
 function appendMessage(message, day, month, year) {
     if (message.isResponse) {
         $(`#Modal-Content-${day}-${month}-${year}`).append(
-            $(`<div class="message d-block"> <img src="../images/robot.png" class="imgBot"> <p class="messageContent messageSmallContent primaryColor secondaryColor"> ${message.content.trim()
-                }</p><div class="timestampSmall">${message.time}</div></div> `));
+            $(`<div class="message d-block"> <img src="../images/robot.png" class="imgBot"> 
+            <p class="messageContent messageSmallContent primaryColor secondaryColor">${message.content.trim()}
+            </p><div class="timestampSmall">${message.time}</div></div> `));
     } else {
-        $(`#Modal-Content-${day}-${month}-${year}`).append($(`<div class="message person d-block"><p class="messageContent messageSmallContent primaryColor secondaryColor">${message.content.trim()}</p><div class="timestampSmall">${message.time}</div></div>`));
+        $(`#Modal-Content-${day}-${month}-${year}`)
+            .append($(`<div class="message person d-block">
+            <p class="messageContent messageSmallContent primaryColor secondaryColor">${message.content.trim()}</p>
+            <div class="timestampSmall">${message.time}</div></div>`));
     }
 }
 
