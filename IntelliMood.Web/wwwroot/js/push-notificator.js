@@ -3,7 +3,7 @@
 		Notification.requestPermission();
 	}
 
-	setInterval(function () { notify('IntelliMood', 'Hi there, do you want to tell me about your day?', 'http://localhost:49735/') }, 1000*60*2);
+	setInterval(function () {notify('IntelliMood', 'Hi there, do you want to tell me about your day?', 'http://localhost:49735/');}, 1000*60*30);
 	
 	function notify(title, desc, url) {
 
