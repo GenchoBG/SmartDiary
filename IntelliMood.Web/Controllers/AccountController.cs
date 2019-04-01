@@ -256,6 +256,8 @@ namespace IntelliMood.Web.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+            this.Response.Cookies.Delete("primaryColor");
+            this.Response.Cookies.Delete("secondaryColor");
             _logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
