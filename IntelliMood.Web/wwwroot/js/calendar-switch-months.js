@@ -33,6 +33,7 @@ function printday(day, month, year) {
         type: 'get',
         success: function (data) {
             console.log(data);
+            $(`#Modal-Content-${day}-${month}-${year}`).html('');
             for (let message of data) {
                 appendMessage(message, day, month, year);
             }
