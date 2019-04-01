@@ -1,10 +1,13 @@
 ﻿function appendMessage(message) {
     if (message.isResponse) {
         $("#messages").append(
-            $(`<div class="message d-block"><img src="../images/robot.png" class="imgBot"> <p class="messageContent messageSmallContent primaryColor secondaryColor"> ${message.content
-                }</p><div class="timestamp">${message.time}</div></div>`));
+            $(`<div class="message d-block"><img src="../images/robot.png" class="imgBot"> 
+            <p class="messageContent messageSmallContent primaryColor secondaryColor">${message.content}</p>
+            <div class="timestamp">${message.time}</div></div>`));
     } else {
-        $("#messages").append($(`<div class="message person d-block"><p class="messageContent messageSmallContent primaryColor secondaryColor">${message.content}</p><div class="timestamp">${message.time.trim()}</div></div>`));
+        $("#messages").append($(`<div class="message person d-block">
+        <p class="messageContent messageSmallContent primaryColor secondaryColor">${message.content}</p>
+        <div class="timestamp">${message.time.trim()}</div></div>`));
     }
 }
 

@@ -3,7 +3,7 @@
 		Notification.requestPermission();
 	}
 
-	setInterval(function () { notify('IntelliMood', 'Hi there, do you want to tell me about your day?', 'http://localhost:49735/') }, 3600000);
+	setInterval(function () { notify('IntelliMood', 'Hi there, do you want to tell me about your day?', 'http://localhost:49735/') }, 1000*60*2);
 	
 	function notify(title, desc, url) {
 
@@ -13,7 +13,7 @@
 		else {
 			var notification = new Notification(title, {
 				icon: 'http://localhost:49735/wwwroot/images/robot.png',
-				body: desc,
+				body: desc
 			});
 
 			/* Remove the notification from Notification Center when clicked.*/

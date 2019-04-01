@@ -103,7 +103,7 @@ body, html {
 
 .person {
     float: right !important;
-    text-align: right;
+    text-align: right !important;
 }
 
 .person p {
@@ -120,6 +120,7 @@ body, html {
     clear: both;
     width: 100%;
     margin-bottom: 1%;
+    text-align: left;
 }
 
 .messageContent {
