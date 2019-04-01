@@ -47,7 +47,7 @@ function printday(day, month, year) {
 function displayDays() {
     var todayButton = "primary";
     for (let day = 1; day <= days; day++) {
-        if (day == today.getDate() && month == today.getMonth() && year == today.getFullYear()) {
+        if (day == today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
             todayButton = "warning";
         }
         daysDiv.innerHTML += `<button type="button" onclick="printday(${day}, ${month}, ${year})" class="btn btn-outline-${todayButton} circular-btn" data-toggle="modal" data-target=".bd-example-modal-lg-${day}-${month}-${year}"><div class="day">${day}</div></button>
@@ -76,7 +76,7 @@ function displayDays() {
                                 </div>`;
         todayButton = "primary";
         if (day % 7 == 0) {
-            daysDiv.innerHTML += `<br /><br />`
+            daysDiv.innerHTML += `<br /><br />`;
         }
     }
 }
