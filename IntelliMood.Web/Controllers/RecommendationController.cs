@@ -7,11 +7,13 @@ using IntelliMood.Data.Models;
 using IntelliMood.Services.Interfaces;
 using IntelliMood.Web.Models.RecommendationViewModels;
 using IntelliMood.Web.Models.UserViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IntelliMood.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RecommendationController : Controller
     {
         private readonly IRecommendationService recommendationService;

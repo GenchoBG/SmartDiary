@@ -28,6 +28,23 @@ namespace IntelliMood.Web.Infrastructure.Extensions
                 Task
                     .Run(async () =>
                     {
+                        if (!await roleManager.RoleExistsAsync("Admin"))
+                        {
+                            var admin = new User
+                            {
+                                UserName = "Admin",
+                                Email = "admin@gmail.com",
+                                DiaryName = "Admin",
+                                PrimaryColor = "#000000",
+                                SecondaryColor = "#00ff7f"
+                            };
+                            await userManager.CreateAsync(admin, "test12");
+
+                            var adminRole = new IdentityRole("Admin");
+                            await roleManager.CreateAsync(adminRole);
+                            await userManager.AddToRoleAsync(admin, "Admin");
+                        }
+
                         if (!db.Recommendations.Any())
                         {
                             var recommendations = new List<Recommendation>();
@@ -138,25 +155,12 @@ namespace IntelliMood.Web.Infrastructure.Extensions
                                 SecondaryColor = "#00ff7f"
                             };
 
-                            var admin = new User
-                            {
-                                UserName = "Admin",
-                                Email = "admin@gmail.com",
-                                DiaryName = "Admin",
-                                PrimaryColor = "#000000",
-                                SecondaryColor = "#00ff7f"
-                            };
 
                             await userManager.CreateAsync(stamat, "test12");
                             await userManager.CreateAsync(neti, "test12");
                             await userManager.CreateAsync(kalin, "test12");
                             await userManager.CreateAsync(kosta, "test12");
-                            await userManager.CreateAsync(admin, "test12");
 
-                            var adminRole = new IdentityRole("Admin");
-                            await roleManager.CreateAsync(adminRole);
-
-                            await userManager.AddToRoleAsync(admin, "Admin");
 
                             var random = new Random();
 
