@@ -66,6 +66,10 @@ namespace IntelliMood.Web.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = await this._userManager.FindByNameAsync(model.UserName);
+                    this.Response.Cookies.Append("primaryColor", user.PrimaryColor);
+                    this.Response.Cookies.Append("secondaryColor", user.SecondaryColor);
+
                     _logger.LogInformation("User logged in.");
                     return RedirectToLocal(returnUrl);
                 }
