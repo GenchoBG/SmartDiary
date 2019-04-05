@@ -29,4 +29,10 @@
     <ProjectReference Include="..\IntelliMood.Services\IntelliMood.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="SentimentModel.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

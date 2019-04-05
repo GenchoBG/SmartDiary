@@ -48,7 +48,8 @@ namespace IntelliMood.Web
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IChatService, ChatService>();
-			services.AddTransient<IEmotionGetter, OurMulticlassEmotionGetter>();            services.AddTransient<IMoodService, MoodService>();
+			services.AddTransient<IEmotionGetter, OurMulticlassEmotionGetter>();
+            services.AddTransient<IMoodService, MoodService>();
             services.AddTransient<IRecommendationService, RecommendationService>();
             services.AddTransient<IRecommender, Recommender>();
 

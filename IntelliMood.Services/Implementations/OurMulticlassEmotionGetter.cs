@@ -24,7 +24,7 @@ namespace IntelliMood.Services.Implementations
             public string Sentiment;
         }
 
-        private static readonly string TrainDataPath = Path.Combine(Environment.CurrentDirectory, "../IntelliMood.Services/Datasets", "text_emotion.csv");
+        private static readonly string TrainDataPath = Path.Combine(Environment.CurrentDirectory, "Datasets", "text_emotion.csv");
         private static readonly string ModelPath = Path.Combine(Environment.CurrentDirectory, "", "SentimentModel.zip");
         private static TextLoader textLoader;
         private static MLContext mlContext;
