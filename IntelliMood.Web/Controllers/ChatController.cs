@@ -60,7 +60,7 @@ namespace IntelliMood.Web.Controllers
             var translatedMessage = this.translator.Translate(data.Message, LanguageCodes.English);
 
             var mood = this.emotionGetter.GetEmotionFromText(translatedMessage.TranslatedText);
-            var moodMessage = $"I predict mood: {mood}";
+            var moodMessage = $"I predict mood: {mood}.";
             var thinkMessage = "I think";
             var feelBetterMessage = "will make you feel better";
             if (translatedMessage.DetectedSourceLanguage != LanguageCodes.English)
