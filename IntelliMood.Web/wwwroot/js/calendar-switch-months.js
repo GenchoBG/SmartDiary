@@ -4,7 +4,10 @@ var year = today.getFullYear();
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 document.getElementById("month-name").innerText = monthNames[month];
-document.getElementById("year").innerText = year;
+//document.getElementById("year").innerText = year;
+$(".year").each(function () {
+    this.innerText = year;
+});
 var days = daysInMonth(month, year);
 var daysDiv = document.getElementById("calendar-days");
 
@@ -29,7 +32,7 @@ function appendMessage(message, day, month, year) {
 
 function printday(day, month, year) {
     $.ajax({
-        url: `/Chat/GetMessagesForDay?day=${day}&month=${month+1}&year=${year}`,
+        url: `/Chat/GetMessagesForDay?day=${day}&month=${month + 1}&year=${year}`,
         type: 'get',
         success: function (data) {
             console.log(data);
@@ -37,12 +40,18 @@ function printday(day, month, year) {
             for (let message of data) {
                 appendMessage(message, day, month, year);
             }
+
+            if (data.length === 0) {
+                $(`#Modal-Content-${day}-${month}-${year}`).append(`No messages to see here :(`);
+            }
         },
         error: function () {
             console.log("Error");
         }
     });
 }
+
+
 
 function displayDays() {
     var todayButton = "primary";
@@ -64,7 +73,10 @@ function displayDays() {
                                           </div>
                                           <div class="modal-body">
                                             <div class="modalChatPreview" id='Modal-Content-${day}-${month}-${year}'>
-                                                
+                                                <div class="spinner">
+                                                    <div class="dot1"></div>
+                                                    <div class="dot2"></div>
+                                                </div>
                                             </div>
                                           </div>
                                           <div class="modal-footer">
@@ -75,7 +87,7 @@ function displayDays() {
                                     </div>
                                 </div>`;
         todayButton = "primary";
-        if (day % 7 == 0) {
+        if (day % 7 === 0) {
             daysDiv.innerHTML += `<br /><br />`;
         }
     }

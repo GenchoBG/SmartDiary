@@ -38,6 +38,9 @@
 			border-color: @secondary;
 			color: @secondary;
 		}
+        .dot1, .dot2 {
+            background-color: @secondary;
+        }
     </style>
 </head>
 <body>
@@ -61,11 +64,11 @@
 
     @if (User.Identity.IsAuthenticated)
     {
-        <div class="row clearfix" id="contentPage">
+        <div class="row" id="contentPage">
             <!-- Sidebar -->
 
-            <div class="col-2">
-                <div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left primaryColor" style="position: relative !important; width: 100%;" id="mySidebar">
+            <div class="col-md-2">
+                <div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-animate-left primaryColor" id="mySidebar">
                     <button class="w3-bar-item w3-button w3-large w3-hide-large secondaryColor" onclick="w3_close()">
                         <p id="menuHeader" class="secondaryColor w3-bar-item w3-button">Menu &times;</p>
                     </button>
@@ -93,7 +96,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-10 ml-auto">
+            <div class="col-md-10">
                 <div class="w3-main">
                     <div class="container-fluid">
                         <!-- Page Content -->

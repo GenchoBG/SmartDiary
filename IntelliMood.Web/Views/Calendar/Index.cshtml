@@ -2,13 +2,21 @@
     ViewData["Title"] = "Index";
 }
 <div class="fullPage">
-    <div class="calendar">
-        <button class="w3-button w3-xlarge w3-hide-large" onclick="w3_open()">☰</button>
+    <div class="row small">
+        <div class="col align-self-center">
+            <button class="w3-button w3-xlarge w3-hide-large" onclick="w3_open()">☰</button>
+        </div>
+        <div class="col">
+            <h2 class="display-4"><div class="year"></div></h2>
+        </div>
+    </div>
+    <div class="row big">
+        <h2 class="display-4 m-auto"><div class="year"></div></h2>
+    </div>
+    <div class="calendar d-block">
         <button id="btn-back" type="button" class="btn btn-outline-primary"> < </button>
         <p id="month-name"></p>
-        <button id="btn-forward" type="button" class="btn btn-outline-primary"> > </button>
-        <div id="year"></div>
-        <div id="year"></div>
+        <button id="btn-forward" type="button" class="btn btn-outline-primary"> > </button>     
         <div id="calendar-days"></div>
     </div>
 </div>
