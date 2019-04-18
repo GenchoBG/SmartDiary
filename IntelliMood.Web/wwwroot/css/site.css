@@ -1,11 +1,11 @@
 ﻿/*Footer*/
 
 footer {
-	margin-left: 60px;
+    margin-left: 60px;
 }
 
-p,a, h2, h1 {
-	font-family: 'Sniglet', cursive;
+p, a, h2, h1 {
+    font-family: 'Sniglet', cursive;
 }
 
 footer {
@@ -22,16 +22,16 @@ footer {
     padding-top: 20px;
 }
 
-.calendar > button {
-    display: inline;
-    margin-bottom: 5%;
-    border-radius: 100%;
-}
+    .calendar > button {
+        display: inline;
+        margin-bottom: 5%;
+        border-radius: 100%;
+    }
 
-.calendar > p {
-    display: inline;
-    font-size: 80pt;
-}
+    .calendar > p {
+        display: inline;
+        font-size: 80pt;
+    }
 
 .day {
     display: inline-block;
@@ -45,7 +45,7 @@ footer {
     width: 50%;
 }
 
-#year {
+.year {
     font-size: 40pt;
 }
 
@@ -83,6 +83,7 @@ body, html {
 
 #mySidebar {
     z-index: 100;
+    width: 15%;
 }
 
 #menuHeader {
@@ -106,13 +107,14 @@ body, html {
     text-align: right !important;
 }
 
-.person p {
-    text-align: left;
-}
+    .person p {
+        text-align: left;
+    }
 
 #thanks-alert {
-	display: none;
+    display: none;
 }
+
 .message {
     padding: auto 0;
     display: block;
@@ -223,9 +225,9 @@ body, html {
     font-size: 15px;
 }
 
-.link:hover {
-    text-decoration: none;
-}
+    .link:hover {
+        text-decoration: none;
+    }
 
 .parent {
     display: flex;
@@ -305,7 +307,57 @@ html {
     }
 }
 
-@media screen and (max-width: 1097px) {
+/* loading banner */
+.spinner {
+    margin: 100px auto;
+    width: 70px;
+    height: 70px;
+    position: relative;
+    text-align: center;
+  
+    -webkit-animation: sk-rotate 2.0s infinite linear;
+    animation: sk-rotate 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: #333;
+    border-radius: 100%;
+  
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+    top: auto;
+    bottom: 0;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
+@keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+@-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+    0%, 100% { 
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    } 50% { 
+          transform: scale(1.0);
+          -webkit-transform: scale(1.0);
+      }
+}
+
+@media screen and (max-width: 1000px) {
     .calendar > p {
         display: inline;
         font-size: 20pt;
@@ -322,8 +374,8 @@ html {
         height: 10px;
     }
 
-    #year {
-        font-size: 10pt;
+    .year {
+        font-size: 40pt;
         margin-bottom: 3%;
     }
 
@@ -415,6 +467,10 @@ html {
 
     .information-table {
         font-size: 8pt;
+    }
+
+    #mySidebar {
+        width: 60%;
     }
 }
 
