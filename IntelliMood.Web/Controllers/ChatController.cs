@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Google.Cloud.Translation.V2;
 using IntelliMood.Data.Models;
 using IntelliMood.Services;
 using IntelliMood.Services.Interfaces;
@@ -22,8 +23,9 @@ namespace IntelliMood.Web.Controllers
         private readonly IMoodService moodService;
         private readonly IRecommendationService recommendationService;
         private readonly IRecommender recommender;
+        private readonly ITranslator translator;
 
-        public ChatController(IChatService chatService, UserManager<User> userManager, IMapper mapper, IEmotionGetter emotionGetter, IMoodService moodService, IRecommender recommender, IRecommendationService recommendationService)
+        public ChatController(IChatService chatService, UserManager<User> userManager, IMapper mapper, IEmotionGetter emotionGetter, IMoodService moodService, IRecommender recommender, IRecommendationService recommendationService, ITranslator translator)
         {
             this.chatService = chatService;
             this.userManager = userManager;
@@ -32,6 +34,7 @@ namespace IntelliMood.Web.Controllers
             this.moodService = moodService;
             this.recommender = recommender;
             this.recommendationService = recommendationService;
+            this.translator = translator;
         }
         
         public async Task<IActionResult> Index()
@@ -54,16 +57,29 @@ namespace IntelliMood.Web.Controllers
             var currentUserId = this.userManager.GetUserId(this.User);
             var message = this.chatService.AddMessage(data.Message, currentUserId, false);
 
-            var mood = this.emotionGetter.GetEmotionFromText(data.Message);
+            var translatedMessage = this.translator.Translate(data.Message, LanguageCodes.English);
+
+            var mood = this.emotionGetter.GetEmotionFromText(translatedMessage.TranslatedText);
             var moodMessage = $"I predict mood: {mood}";
+            var thinkMessage = "I think";
+            var feelBetterMessage = "will make you feel better";
+            if (translatedMessage.DetectedSourceLanguage != LanguageCodes.English)
+            {
+                moodMessage = this.translator.Translate(moodMessage, translatedMessage.DetectedSourceLanguage).TranslatedText;
+                thinkMessage = this.translator.Translate(thinkMessage, translatedMessage.DetectedSourceLanguage).TranslatedText;
+                feelBetterMessage = this.translator.Translate(feelBetterMessage, translatedMessage.DetectedSourceLanguage).TranslatedText;
+            }
+            
             if (this.IsMoodNegative(mood))
             {
                 var recommendation = this.recommender.Recommend(currentUserId);
                 
 
                 moodMessage += Environment.NewLine;
-                moodMessage += $"I think '{recommendation.Content}' will make you feel better!";
+                moodMessage += $"{thinkMessage} '{recommendation.Content}' {feelBetterMessage}!";
                 moodMessage += Environment.NewLine;
+
+
 
                 var response = this.chatService.AddMessage(moodMessage, currentUserId, true);
 

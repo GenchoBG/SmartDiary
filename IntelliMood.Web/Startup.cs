@@ -52,6 +52,7 @@ namespace IntelliMood.Web
             services.AddTransient<IMoodService, MoodService>();
             services.AddTransient<IRecommendationService, RecommendationService>();
             services.AddTransient<IRecommender, Recommender>();
+            services.AddTransient<ITranslator, GoogleTranslator>();
 
             services.AddAutoMapper();
 
