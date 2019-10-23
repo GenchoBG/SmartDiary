@@ -1,4 +1,9 @@
-﻿function appendMessage(message) {
+﻿var emptyMsg = false;
+
+function appendMessage(message) {
+    if (emptyMsg === true) {
+        $("#empty-messages").remove();
+    }
     if (message.isResponse) {
         $("#messages").append(
             $(`<div class="message d-block"><img src="../images/robot.png" class="imgBot"> 
@@ -24,7 +29,6 @@ function appendRecommendation(time, element) {
 
     $("#messages").append(div);
 }
-
 
 function clearMessages() {
     $("#messages").html("");
@@ -99,9 +103,28 @@ function addRecommendationWithRating(button, rating) {
     });
 }
 
+function typingIndicators(add) {
+    let typing = `<div class="ticontainer messageContent messageSmallContent primaryColor">
+                      <div class="tiblock">
+                        <div class="tidot"></div>
+                        <div class="tidot"></div>
+                        <div class="tidot"></div>
+                      </div>
+                    </div>`;
+    if (add === true) {
+        $("#messages").append($(`<div class="message d-block" id="typing">
+                                    <img src="../images/robot.png" class="imgBot">
+                                    ${typing}
+                                </div>`));
+    } else {
+        $("#typing").remove();
+    }
+}
+
 $("#enterBtn").on("click",
     function (event) {
         if ($("#chatBox").val()) {
+            typingIndicators(true);
             let val = $("#chatBox").val();
             clearChatBox(val);
 
@@ -125,6 +148,7 @@ $("#enterBtn").on("click",
                     var response = data.response;
                     console.log(data);
 
+                    typingIndicators(false);
                     appendMessage(response);
                     if (data.hasRecommendation) {
                         var element = $(`<div>`)
@@ -150,6 +174,7 @@ $("#enterBtn").on("click",
                 },
                 error: function () {
                     console.log("Error");
+                    typingIndicators(false);
                 }
             });
             event.preventDefault();
@@ -181,6 +206,12 @@ $(document).ready(function () {
             for (let message of data) {
                 appendMessage(message);
             }
+
+            if (data.length === 0) {
+                emptyMsg = true;
+                $("#messages").append(`<div id="empty-messages"><h2>No messages today :c</h2></div>`);
+            }
+
             scrollToBottom();
         },
         error: function () {

@@ -130,7 +130,7 @@ body, html {
     overflow-wrap: normal;
     max-width: 70%;
     padding: 10px 20px;
-    border-radius: 45px;
+    border-radius: 35px;
     margin-bottom: 0;
     display: inline-block;
 }
@@ -175,10 +175,13 @@ body, html {
 }
 
 #inputArea {
+    /* position: absolute; */
+    bottom: 0;
     z-index: 3;
     background-color: white;
     padding: 0 0 1%;
     margin-bottom: 0;
+    /* width: 90%; */
 }
 
 #messages {
@@ -357,6 +360,47 @@ html {
       }
 }
 
+/* typing indicators */
+.tiblock {
+    -ms-align-items: center;
+    -o-align-items: center;
+    -webkit-align-items: center;
+    align-items: center;
+    display: flex;
+}
+
+.tidot {
+    -webkit-animation: mercuryTypingAnimation 1.5s infinite ease-in-out;
+    -ms-border-radius: 2px;
+    border-radius: 2px;
+    display: inline-block;
+    height: 5px;
+    margin-right: 2px;
+    width: 5px;
+}
+
+@-webkit-keyframes mercuryTypingAnimation {
+    0% {
+        -webkit-transform: translateY(0px);
+    }
+    28% {
+        -webkit-transform: translateY(-5px);
+    }
+    44% {
+        -webkit-transform: translateY(0px);
+    }
+}
+
+.tidot:nth-child(1) {
+    -webkit-animation-delay: 200ms;
+}
+.tidot:nth-child(2) {
+    -webkit-animation-delay: 300ms;
+}
+.tidot:nth-child(3) {
+    -webkit-animation-delay: 400ms;
+}
+
 @media screen and (max-width: 1000px) {
     .calendar > p {
         display: inline;
@@ -422,6 +466,7 @@ html {
         width: 10%;
         height: 10%;
         display: inline-block;
+        -ms-border-radius: 60px;
         border-radius: 60px;
         background-color: transparent;
         border-color: transparent;
@@ -479,6 +524,7 @@ html {
         width: 15%;
         height: 15%;
         display: inline-block;
+        -ms-border-radius: 60px;
         border-radius: 60px;
         background-color: transparent;
         border-color: transparent;
