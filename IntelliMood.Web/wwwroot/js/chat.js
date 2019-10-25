@@ -124,7 +124,6 @@ function typingIndicators(add) {
 $("#enterBtn").on("click",
     function (event) {
         if ($("#chatBox").val()) {
-            typingIndicators(true);
             let val = $("#chatBox").val();
             clearChatBox(val);
 
@@ -134,6 +133,7 @@ $("#enterBtn").on("click",
                 time: DisplayCurrentTime(new Date(Date.now()))
             });
             console.log(val);
+            typingIndicators(true);
             scrollToBottom();
 
             $.ajax({
