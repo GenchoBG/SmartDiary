@@ -9,11 +9,13 @@ using IntelliMood.Data.Models;
 using IntelliMood.Services;
 using IntelliMood.Services.Interfaces;
 using IntelliMood.Web.Models.ChatViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IntelliMood.Web.Controllers
 {
+    [Authorize]
     public class ChatController : Controller
     {
         private readonly IChatService chatService;
@@ -61,6 +63,8 @@ namespace IntelliMood.Web.Controllers
 
 //            var mood = this.emotionGetter.GetEmotionFromText(translatedMessage.TranslatedText);
             var mood = this.emotionGetter.GetEmotionFromText(data.Message);
+            this.moodService.Add(currentUserId, mood);
+
             var moodMessage = $"I predict mood: {mood}.";
             var thinkMessage = "I think";
             var feelBetterMessage = "will make you feel better";
@@ -94,9 +98,7 @@ namespace IntelliMood.Web.Controllers
 
             }
             
-            var responseMessage = this.chatService.AddMessage(moodMessage, currentUserId, true);
-
-            this.moodService.Add(currentUserId, mood);
+            var responseMessage = this.chatService.AddMessage(moodMessage, currentUserId, true);    
 
 
             return this.Json(new

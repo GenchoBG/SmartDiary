@@ -67,7 +67,7 @@ function drawYearlyChart(rawData) {
 $(window).on("load", function () {
 
     let currentYear = new Date().getFullYear();
-    let currentMonth = new Date().getMonth() + 1;
+    let currentMonth = new Date().getMonth();
 
     $.ajax({
         url: `/Stats/GetMonthly?month=${currentMonth}&year=${currentYear}`,
