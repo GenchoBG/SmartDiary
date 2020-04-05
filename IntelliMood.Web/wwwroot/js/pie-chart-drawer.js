@@ -65,8 +65,12 @@ function drawYearlyChart(rawData) {
     chart.draw(data, options);
 }
 $(window).on("load", function () {
+
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth() + 1;
+
     $.ajax({
-        url: '/Stats/GetMonthly?month=4&year=2019',
+        url: `/Stats/GetMonthly?month=${currentMonth}&year=${currentYear}`,
         type: 'get',
         success: function (data) {
             drawMonthlyChart(data);
@@ -77,7 +81,7 @@ $(window).on("load", function () {
     });
 
     $.ajax({
-        url: '/Stats/GetYearly?year=2019',
+        url: `/Stats/GetYearly?year=${currentYear}`,
         type: 'get',
         success: function (data) {
             drawYearlyChart(data);
