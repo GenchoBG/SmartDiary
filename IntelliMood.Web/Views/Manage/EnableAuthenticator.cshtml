@@ -4,6 +4,12 @@
     ViewData.AddActivePage(ManageNavPages.TwoFactorAuthentication);
 }
 
+<style>
+    body {
+        overflow-y: auto;
+    }
+</style>
+
 <h4>@ViewData["Title"]</h4>
 <div>
     <p>To use an authenticator app go through the following steps:</p>
@@ -53,8 +59,8 @@
     <script type="text/javascript">
         new QRCode(document.getElementById("qrCode"), {
             text: "@Html.Raw(Model.AuthenticatorUri)",
-            width: 150,
-            height: 150,
+            width: 200,
+            height: 200,
             colorDark : "#000000",
             colorLight : "#ffffff",
             correctLevel : QRCode.CorrectLevel.H
